@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.thinkfast" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="22" android:targetSdkVersion="28" />
+	<application android:label="ThinkFast.Android" android:icon="@drawable/ic">
+		<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-6005536417008283~6233485297" />
+	</application>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+</manifest>

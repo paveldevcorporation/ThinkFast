@@ -1,0 +1,157 @@
+﻿<com.google.android.gms.ads.formats.UnifiedNativeAdView android:hardwareAccelerated="false"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <android.support.v7.widget.CardView
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:cardPreventCornerOverlap="false"
+      app:cardCornerRadius="12dp">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#FFFFFF">
+
+      <AbsoluteLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_weight="1">
+
+        <com.google.android.gms.ads.formats.MediaView
+            android:id="@+id/ad_media"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Ad"
+            android:textColor="#FFFFFF"
+            android:background="#FFCC66"
+            android:textSize="14sp"
+            android:padding="4dp" />
+      </AbsoluteLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:padding="5dp">
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="fill_horizontal">
+
+          <LinearLayout
+              android:layout_height="wrap_content"
+              android:layout_width="wrap_content"
+              android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ad_app_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:adjustViewBounds="true"
+                android:paddingBottom="5dp"
+                android:paddingEnd="5dp"
+                android:paddingRight="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+              <TextView
+                  android:id="@+id/ad_headline"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textColor="#0000FF"
+                  android:text="Join the dark side!"
+                  android:textSize="16sp"
+                  android:textStyle="bold" />
+
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/ad_advertiser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:textSize="14sp"
+                    android:text="Google"
+                    android:textColor="#222222"
+                    android:textStyle="bold"/>
+
+                <RatingBar
+                    android:id="@+id/ad_stars"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:rating="4" />
+              </LinearLayout>
+
+            </LinearLayout>
+          </LinearLayout>
+
+          <TextView
+              android:textColor="#555555"
+              android:id="@+id/ad_body"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nis."
+              android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="5dp">
+
+          <TextView
+              android:id="@+id/ad_store"
+              android:text="Google Play"
+              android:textColor="#222222"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center_horizontal"
+              android:textSize="12sp" />
+
+          <Button
+              android:id="@+id/ad_call_to_action"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:layout_margin="0dp"
+              android:text="INSTALL"
+              android:textSize="12sp" />
+
+          <TextView
+              android:id="@+id/ad_price"
+              android:text="$ 3.49"
+              android:textColor="#222222"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center_horizontal"
+              android:textSize="12sp" />
+
+        </LinearLayout>
+      </LinearLayout>
+    </LinearLayout>
+  </android.support.v7.widget.CardView>
+</com.google.android.gms.ads.formats.UnifiedNativeAdView>

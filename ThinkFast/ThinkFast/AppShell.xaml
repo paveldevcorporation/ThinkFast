@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:ThinkFast;assembly=ThinkFast"
+             xmlns:view="clr-namespace:ThinkFast.Views;assembly=ThinkFast"
+             xmlns:resource="clr-namespace:ThinkFast.Resources;assembly=ThinkFast"
+             mc:Ignorable="d"
+             x:Class="ThinkFast.AppShell"
+             Visual="Material">
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Color x:Key="NavigationPrimary">#383840</Color>
+            <Style x:Key="BaseStyle"
+                   TargetType="Element">
+                <Setter Property="Shell.BackgroundColor"
+                        Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.ForegroundColor"
+                        Value="White" />
+                <Setter Property="Shell.TitleColor"
+                        Value="White" />
+                <Setter Property="Shell.DisabledColor"
+                        Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor"
+                        Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor"
+                        Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.TabBarForegroundColor"
+                        Value="White" />
+                <Setter Property="Shell.TabBarUnselectedColor"
+                        Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarTitleColor"
+                        Value="White" />
+            </Style>
+            <Style TargetType="TabBar"
+                   BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#7090A0" />
+                <Setter Property="WidthRequest" Value="150" />
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
+    <TabBar  Route="AllOperations">
+        <Tab Route="Plus"  Title="{resource:Translate Plus}" Icon="add.png">
+            <ShellContent ContentTemplate="{DataTemplate view:Plus}"/>
+        </Tab>
+        <Tab Route="Minus" Title="{resource:Translate Minus}" Icon="minus.png">
+            <ShellContent ContentTemplate="{DataTemplate view:Minus}" />
+        </Tab>
+
+        <Tab Route="AllOperations" Title="{resource:Translate Combo}" Icon="mathematical_symbols.png">
+            <ShellContent  ContentTemplate="{DataTemplate view:AllOperations}" />
+        </Tab>
+        <Tab Route="Multiply" Title="{resource:Translate Multiplication}" Icon="multiply.png">
+            <ShellContent ContentTemplate="{DataTemplate view:Multiply}" />
+        </Tab>
+        <Tab Route="Division" Title="{resource:Translate Division}" Icon="division.png">
+            <ShellContent ContentTemplate="{DataTemplate view:Division}" />
+        </Tab>
+
+    </TabBar>
+    
+</Shell>

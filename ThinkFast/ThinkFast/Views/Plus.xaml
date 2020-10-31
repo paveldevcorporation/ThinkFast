@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:resource="clr-namespace:ThinkFast.Resources;assembly=ThinkFast"
+             xmlns:views="clr-namespace:ThinkFast.Views;assembly=ThinkFast"
+             mc:Ignorable="d"
+             x:Class="ThinkFast.Views.Plus"
+             BackgroundColor="#D0E0F0"
+             Title="{resource:Translate Plus}">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Margin="0,16,0,0" Text="0 + 0"
+                    HorizontalOptions="Center"
+                    Clicked="OneOneClicked"/>
+            <Button Margin="0,16,0,0" Text="00 + 00"
+                    HorizontalOptions="Center" 
+                    Clicked="TwoTwoClicked"/>
+            <Button Margin="0,16,0,0" Text="000 + 000"
+                    HorizontalOptions="Center" 
+                    Clicked="ThreeThreeClicked"/>
+
+            <!--<views:NativeAdView HeightRequest="280" VerticalOptions="EndAndExpand"/>-->
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
