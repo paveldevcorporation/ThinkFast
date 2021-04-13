@@ -80,7 +80,7 @@ namespace ThinkFast.Views
                     //g--;
                     //b--;
                     //progressBar.ProgressColor = Color.FromRgb(r, g, b);
-                }, 8 * 60, 8 * 1000, Easing.Linear,
+                }, 8 * 60, 16 * 1000, Easing.Linear,
                 GetStack);
         }
 

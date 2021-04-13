@@ -11,7 +11,7 @@
              Visual="Material">
     <Shell.Resources>
         <ResourceDictionary>
-            <Color x:Key="NavigationPrimary">#383840</Color>
+            <Color x:Key="NavigationPrimary">#006C84</Color>
             <Style x:Key="BaseStyle"
                    TargetType="Element">
                 <Setter Property="Shell.BackgroundColor"
@@ -37,7 +37,7 @@
                    BasedOn="{StaticResource BaseStyle}" />
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="BackgroundColor" Value="#7090A0" />
+                <Setter Property="BackgroundColor" Value="#006C84" />
                 <Setter Property="WidthRequest" Value="150" />
             </Style>
         </ResourceDictionary>

@@ -10,12 +10,13 @@ namespace ThinkFast
         public AppShell()
         {
             InitializeComponent();
-            var pref = DependencyService.Get<IPref>();
+            //var pref = DependencyService.Get<IPref>();
 
-            if (pref.GetPref())
-            {
-                DisplayAlert("THinkFast", "Привет ребята", "Ok");
-            }
+            //if (true)
+            //{
+            //    DisplayAlert("THinkFast", "Привет, умнейший из умнейших, гуру счета, смекалки и сообразительности! Сейчас тебе предстоит проверить свои знания, погрузиться в необъятные просторы цифр, проявить свою смекалку и находчивость!", "Ok");
+            //    //pref.SavePref();
+            //}
             
         }
     }

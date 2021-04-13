@@ -13,14 +13,20 @@ namespace ThinkFast.Models
             {
                 return PlusMinusExample(step, random);
             }
-
-            var maxValue = 5 * step;
-            var minValue = 2 * step;
-            var first = random.Next(minValue, maxValue);
-            var second = random.Next(minValue, maxValue);
             var operation = random.Next(1, 100) % 2 == 0
                 ? GetPlusMinusOperation(random)
                 : GetMultiplyDivisionSymbols(random);
+
+            var maxCof = operation == Operation.Multiply
+            ? 2
+            : 5;
+            var maxValue = maxCof * step;
+            var minCof = operation == Operation.Multiply
+                ? 1
+                : 2;
+            var minValue = minCof * step;
+            var first = random.Next(minValue, maxValue);
+            var second = random.Next(minValue, maxValue);
 
             return operation.CreateExample(first, second, step);
         }
