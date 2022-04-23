@@ -14,7 +14,7 @@
             <Button Margin="0,16,0,0" Text="{resources:Translate Play}"
                     HorizontalOptions="Center"
                     Clicked="StartGame"/>
-            <!--<views:NativeAdView HeightRequest="280"  VerticalOptions="EndAndExpand"/>-->
+            <views:NativeAdView HeightRequest="280"  VerticalOptions="EndAndExpand"/>
 
         </StackLayout>
         

@@ -262,15 +262,16 @@ namespace ThinkFast.Views
             };
             goBackButton.Clicked += GoBackButtonOnClicked;
 
-            var adMod = new NativeAdView();
+            //var adMod = new NativeAdView();
 
             var stack = new StackLayout
             {
-                Children = {frame, button, goBackButton, adMod },
+                Children = {frame, button, goBackButton },
                 BackgroundColor = Color.FromRgb(232, 232, 240)
             };
 
             Content = stack;
+            DependencyService.Get<IAdInterstitial>().ShowAd();
         }
 
         private Frame GetAnswerCard()
