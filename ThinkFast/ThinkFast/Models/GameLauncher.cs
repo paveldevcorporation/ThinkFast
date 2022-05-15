@@ -9,5 +9,19 @@ namespace ThinkFast.Models
         {
             await Shell.Current.GoToAsync($"Training?firstRung={firstRung}&secondRung={secondRung}&operation={operation.Id}");
         }
+
+        public static async Task RuleAdd()
+        {
+            await Shell.Current.GoToAsync("AddRule");
+        }
+        public static async Task RuleMinus()
+        {
+            await Shell.Current.GoToAsync("MinusRule");
+        }
+
+        public static async Task RuleMulti()
+        {
+            await Shell.Current.GoToAsync("MultiplyRule");
+        }
     }
 }

@@ -11,6 +11,9 @@
              Title="{resources:Translate Multiplication}">
     <ContentPage.Content>
         <StackLayout>
+            <Button Margin="0,16,0,0" Text="{resources:Translate Rules}"
+                    HorizontalOptions="Center"
+                    Clicked="RuleClicked"/>
             <Button Margin="0,16,0,0" Text="0 × 0"
                     HorizontalOptions="Center"
                     Clicked="OneOneClicked"/>

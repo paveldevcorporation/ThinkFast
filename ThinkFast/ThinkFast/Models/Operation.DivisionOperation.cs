@@ -34,9 +34,9 @@ namespace ThinkFast.Models
 
                 //if (first < 100 && first / second > 10)
                 //{
-                //    var list = new List<string>(4) {$"{first} / {second} = "};
+                //    var list = new List<string>(4) {$"{first} ÷ {second} = "};
                 //    var a = Ten * second;
-                //    var s = $"{a} / {second} + {first - a} / {second}";
+                //    var s = $"{a} ÷ {second} + {first - a} ÷ {second}";
 
                 //    list.Add(s);
                 //    list.Add($"= {first / second}");
@@ -46,7 +46,7 @@ namespace ThinkFast.Models
 
                 if (second == 5)
                 {
-                    var solution = $"{first} / {second} = {first * 2} / {Ten} = {first / second}";
+                    var solution = $"{first} ÷ {second} = {first * 2} ÷ {Ten} = {first / second}";
 
                     return new AnswerMessage(AppResources.Division5Message, solution);
                 }
@@ -70,7 +70,7 @@ namespace ThinkFast.Models
 
             private static string GetSolutionM(long first, long second)
             {
-                var list = new List<string>(4) {$"{first} / {second} = "};
+                var list = new List<string>(4) {$"{first} ÷ {second} = "};
                 list.Add(DecisionDivision(first, second));
                 list.Add($"= {first / second}");
                 return string.Concat(list);
@@ -78,7 +78,7 @@ namespace ThinkFast.Models
 
             private static string GetSolutionMSmall(long first, long second)
             {
-                var list = new List<string>(4) { $"{first} / {second} = " };
+                var list = new List<string>(4) { $"{first} ÷ {second} = " };
                 list.Add(DecisionDivisionSmal(first, second));
                 list.Add($" = {first / second}");
                 return string.Concat(list);
@@ -91,7 +91,7 @@ namespace ThinkFast.Models
 
                 if (capacity <= 2)
                 {
-                    return $"{first} / {second}";
+                    return $"{first} ÷ {second}";
                 }
 
                 var paw = (int) Math.Pow(10, capacity - 2);
@@ -106,7 +106,7 @@ namespace ThinkFast.Models
 
                 var nextDividend = first - easyFirst;
                 var t = DecisionDivision(nextDividend, second);
-                var s = $"{easyFirst} / {second} + {t} ";
+                var s = $"{easyFirst} ÷ {second} + {t} ";
 
                 return s;
             }
@@ -126,7 +126,7 @@ namespace ThinkFast.Models
                     t -= 10;
                 }
 
-                return $"{t} / {second} + {first - t} / {second}";
+                return $"{t} ÷ {second} + {first - t} ÷ {second}";
             }
 
             private Example FindDivider(long first, long second, int step)

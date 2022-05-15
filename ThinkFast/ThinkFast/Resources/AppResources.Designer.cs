@@ -19,7 +19,7 @@ namespace ThinkFast.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class AppResources {
@@ -57,6 +57,15 @@ namespace ThinkFast.Resources {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decompose the second term into convenient terms (first add up to a round number, then the remaining part).
+        /// </summary>
+        public static string Addition1To20Rule {
+            get {
+                return ResourceManager.GetString("Addition1To20Rule", resourceCulture);
             }
         }
         
@@ -300,6 +309,24 @@ namespace ThinkFast.Resources {
         public static string Repeat {
             get {
                 return ResourceManager.GetString("Repeat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rules.
+        /// </summary>
+        public static string Rules {
+            get {
+                return ResourceManager.GetString("Rules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decompose the subtractible into convenient terms (first subtract such a number so that it turns out to be round, then the remaining part).
+        /// </summary>
+        public static string Subtraction1To20Rule {
+            get {
+                return ResourceManager.GetString("Subtraction1To20Rule", resourceCulture);
             }
         }
     }

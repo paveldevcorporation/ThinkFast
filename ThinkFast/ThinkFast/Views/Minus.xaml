@@ -11,6 +11,9 @@
              Title="{resources:Translate Minus}">
     <ContentPage.Content>
         <StackLayout>
+            <Button Margin="0,16,0,0" Text="{resources:Translate Rules}"
+                    HorizontalOptions="Center"
+                    Clicked="RuleClicked"/>
             <Button Margin="0,16,0,0" Text="00 - 0"
                     HorizontalOptions="Center"
                     Clicked="TwoOneClicked"/>

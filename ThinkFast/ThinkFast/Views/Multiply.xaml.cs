@@ -13,6 +13,11 @@ namespace ThinkFast.Views
             InitializeComponent();
         }
 
+        private async void RuleClicked(object sender, EventArgs e)
+        {
+            await GameLauncher.RuleMulti();
+        }
+
         private async void OneOneClicked(object sender, EventArgs e)
         {
             await GameLauncher.Start(1, 1, Operation.Multiply);

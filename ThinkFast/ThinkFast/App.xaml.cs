@@ -1,4 +1,5 @@
 ﻿using ThinkFast.Views;
+using ThinkFast.Views.Rules;
 using Xamarin.Forms;
 
 namespace ThinkFast
@@ -13,6 +14,9 @@ namespace ThinkFast
 
             Routing.RegisterRoute("Training", typeof(Training));
             Routing.RegisterRoute("GamePage", typeof(GamePage));
+            Routing.RegisterRoute("AddRule", typeof(AddRule));
+            Routing.RegisterRoute("MinusRule", typeof(MinusRule));
+            Routing.RegisterRoute("MultiplyRule", typeof(MultiplyRule));
         }
 
         protected override void OnStart()

@@ -31,7 +31,7 @@ namespace ThinkFast.Models
                     return null;
                 }
 
-                if (Sen.Contains(first))
+                if (Sen.Contains(first) && (first + second) % 10 != 0)
                 {
                     switch (first)
                     {
@@ -46,7 +46,7 @@ namespace ThinkFast.Models
                             var solution = $"{first} + {second} = {Ten} + {second} - 2 = {first + second}";
 
                             return new AnswerMessage(AppResources.Plus_7_8_9_Message, solution);
-                            }
+                        }
                         case 9:
                         {
                             var solution = $"{first} + {second} = {Ten} + {second} - 1 = {first + second}";
@@ -57,7 +57,7 @@ namespace ThinkFast.Models
                     }
                 }
 
-                if (Sen.Contains(second))
+                if (Sen.Contains(second) && (first + second) % 10 != 0)
                 {
                     switch (second)
                     {
@@ -81,6 +81,24 @@ namespace ThinkFast.Models
                             }
                         default: return null;
                     }
+                }
+
+                if (first + second > 10 && second < 10)
+                {
+                    var answer = first + second;
+                    var withTransition = first / 10 < answer / 10;
+
+                    if (answer > 10 && withTransition && answer % 10 != 0)
+                    {
+                        var x = answer / 10 * 10;
+                        var secondOne = x - first;
+                        var secondTwo = answer - x;
+                        var solution = $"{first} + {second} = {first} + {secondOne} + {secondTwo} = {first + second}";
+
+                        return new AnswerMessage(AppResources.Addition1To20Rule, solution);
+                    }
+
+                    return null;
                 }
 
                 if (first > 10 && second > 10)

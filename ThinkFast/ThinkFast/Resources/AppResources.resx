@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Addition1To20Rule" xml:space="preserve">
+    <value>Decompose the second term into convenient terms (first add up to a round number, then the remaining part)</value>
+  </data>
   <data name="Back" xml:space="preserve">
     <value>Back</value>
   </data>
@@ -197,5 +200,11 @@
   </data>
   <data name="Repeat" xml:space="preserve">
     <value>Repeat</value>
+  </data>
+  <data name="Rules" xml:space="preserve">
+    <value>Rules</value>
+  </data>
+  <data name="Subtraction1To20Rule" xml:space="preserve">
+    <value>Decompose the subtractible into convenient terms (first subtract such a number so that it turns out to be round, then the remaining part)</value>
   </data>
 </root>

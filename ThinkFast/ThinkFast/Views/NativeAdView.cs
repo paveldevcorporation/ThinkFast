@@ -17,7 +17,6 @@ namespace ThinkFast.Views
             var placeholderGrid = new Grid();
             var placeHolderText = new Label
             {
-                Text = "AD",
                 FontSize = 48,
                 FontAttributes = FontAttributes.Bold,
                 TextColor = Color.White,

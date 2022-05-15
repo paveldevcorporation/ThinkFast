@@ -13,6 +13,11 @@ namespace ThinkFast.Views
             InitializeComponent();
         }
 
+        private async void RuleClicked(object sender, EventArgs e)
+        {
+            await GameLauncher.RuleMinus();
+        }
+
         private async void ThreeThreeClicked(object sender, EventArgs e)
         {
             await GameLauncher.Start(3, 3, Operation.Minus);
