@@ -20,17 +20,17 @@ namespace ThinkFast.Views
 
         private async void ThreeThreeClicked(object sender, EventArgs e)
         {
-            await GameLauncher.Start(3, 3, Operation.Minus);
+            await GameLauncher.Start(3, 3, Operation.Minus, 25);
         }
 
         private async void TwoOneClicked(object sender, EventArgs e)
         {
-            await GameLauncher.Start(2, 1, Operation.Minus);
+            await GameLauncher.Start(2, 1, Operation.Minus, 10);
         }
 
         private async void TwoTwoClicked(object sender, EventArgs e)
         {
-            await GameLauncher.Start(2, 2, Operation.Minus);
+            await GameLauncher.Start(2, 2, Operation.Minus, 15);
         }
     }
 }

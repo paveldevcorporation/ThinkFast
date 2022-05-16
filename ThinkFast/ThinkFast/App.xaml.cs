@@ -17,6 +17,7 @@ namespace ThinkFast
             Routing.RegisterRoute("AddRule", typeof(AddRule));
             Routing.RegisterRoute("MinusRule", typeof(MinusRule));
             Routing.RegisterRoute("MultiplyRule", typeof(MultiplyRule));
+            Routing.RegisterRoute("DivisionRule", typeof(DivisionRule));
         }
 
         protected override void OnStart()

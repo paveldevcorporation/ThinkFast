@@ -5,9 +5,9 @@ namespace ThinkFast.Models
 {
     public static class GameLauncher
     {
-        public static async Task Start(int firstRung, int secondRung, Operation operation)
+        public static async Task Start(int firstRung, int secondRung, Operation operation, uint leadTime)
         {
-            await Shell.Current.GoToAsync($"Training?firstRung={firstRung}&secondRung={secondRung}&operation={operation.Id}");
+            await Shell.Current.GoToAsync($"Training?firstRung={firstRung}&secondRung={secondRung}&operation={operation.Id}&leadTime={leadTime}");
         }
 
         public static async Task RuleAdd()
@@ -22,6 +22,11 @@ namespace ThinkFast.Models
         public static async Task RuleMulti()
         {
             await Shell.Current.GoToAsync("MultiplyRule");
+        }
+
+        public static async Task RuleDivision()
+        {
+            await Shell.Current.GoToAsync("DivisionRule");
         }
     }
 }

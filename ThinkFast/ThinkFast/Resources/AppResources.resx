@@ -129,8 +129,14 @@
   <data name="Division" xml:space="preserve">
     <value>Division</value>
   </data>
+  <data name="Division4Message" xml:space="preserve">
+    <value>To divide a number by 4, it is divided twice by 2.</value>
+  </data>
   <data name="Division5Message" xml:space="preserve">
     <value>To divide by 5, first multiply by 2, and then divide the result by 10.</value>
+  </data>
+  <data name="Division8Message" xml:space="preserve">
+    <value>To divide a number by 8, divide it three times by 2.</value>
   </data>
   <data name="DivisionOneMessage" xml:space="preserve">
     <value>To divide by a single-digit number, we divide the original multi-digit number into convenient parts, which will be exactly divisible by a single-digit number.</value>

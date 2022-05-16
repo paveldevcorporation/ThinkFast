@@ -44,9 +44,23 @@ namespace ThinkFast.Models
                 //    return string.Concat(list);
                 //}
 
+                if (second == 4)
+                {
+                    var solution = $"{first} {Symbol} {second} = {first / 2} {Symbol} {2} = {first / second}";
+
+                    return new AnswerMessage(AppResources.Division5Message, solution);
+                }
+
                 if (second == 5)
                 {
                     var solution = $"{first} ÷ {second} = {first * 2} ÷ {Ten} = {first / second}";
+
+                    return new AnswerMessage(AppResources.Division5Message, solution);
+                }
+
+                if (second == 8)
+                {
+                    var solution = $"{first} {Symbol} {second} = {first / 2} {Symbol} {2} = {first / 2 / 2 } {Symbol} {2} = {first / second}";
 
                     return new AnswerMessage(AppResources.Division5Message, solution);
                 }

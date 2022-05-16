@@ -13,15 +13,19 @@ namespace ThinkFast.Views
             InitializeComponent();
         }
 
+        private async void RuleClicked(object sender, EventArgs e)
+        {
+            await GameLauncher.RuleDivision();
+        }
 
         private async void TwoOneClicked(object sender, EventArgs e)
         {
-            await GameLauncher.Start(2, 1, Operation.Division);
+            await GameLauncher.Start(2, 1, Operation.Division, 10);
         }
 
         private async void ThreeTwoClicked(object sender, EventArgs e)
         {
-            await GameLauncher.Start(3, 1, Operation.Division);
+            await GameLauncher.Start(3, 1, Operation.Division, 20);
         }
     }
 }

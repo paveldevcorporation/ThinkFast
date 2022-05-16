@@ -9,6 +9,7 @@ namespace ThinkFast.Views
     [QueryProperty("FirstRung", "firstRung")]
     [QueryProperty("SecondRung", "secondRung")]
     [QueryProperty("Operation", "operation")]
+    [QueryProperty("LeadTime", "leadTime")]
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Training : ContentPage
     {
@@ -24,6 +25,7 @@ namespace ThinkFast.Views
         private ProgressBar progressBar;
         private Label question;
         private int secondRung;
+        private uint leadTime;
 
 
         public Training()
@@ -53,6 +55,14 @@ namespace ThinkFast.Views
             {
                 var id = int.Parse(Uri.UnescapeDataString(value));
                 operation = Models.Operation.Get(id);
+            }
+        }
+
+        public string LeadTime
+        {
+            set
+            {
+                leadTime = uint.Parse(Uri.UnescapeDataString(value));
                 StartGame();
             }
         }
@@ -80,7 +90,7 @@ namespace ThinkFast.Views
                     //g--;
                     //b--;
                     //progressBar.ProgressColor = Color.FromRgb(r, g, b);
-                }, 8 * 60, 16 * 1000, Easing.Linear,
+                }, 8 * 60, leadTime * 1000, Easing.Linear,
                 GetStack);
         }
 

@@ -97,11 +97,29 @@ namespace ThinkFast.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To divide a number by 4, it is divided twice by 2..
+        /// </summary>
+        public static string Division4Message {
+            get {
+                return ResourceManager.GetString("Division4Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To divide by 5, first multiply by 2, and then divide the result by 10..
         /// </summary>
         public static string Division5Message {
             get {
                 return ResourceManager.GetString("Division5Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To divide a number by 8, divide it three times by 2..
+        /// </summary>
+        public static string Division8Message {
+            get {
+                return ResourceManager.GetString("Division8Message", resourceCulture);
             }
         }
         

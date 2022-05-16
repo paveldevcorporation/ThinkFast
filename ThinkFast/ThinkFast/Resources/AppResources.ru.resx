@@ -129,8 +129,14 @@
   <data name="Division" xml:space="preserve">
     <value>Деление</value>
   </data>
+  <data name="Division4Message" xml:space="preserve">
+    <value>Чтобы разделить число на 4, его дважды делят на 2.</value>
+  </data>
   <data name="Division5Message" xml:space="preserve">
     <value>Для деления на 5, сначала умножаем на 2, а затем полученное делим на 10.</value>
+  </data>
+  <data name="Division8Message" xml:space="preserve">
+    <value>Чтобы разделить число на 8, его трижды делят на 2.</value>
   </data>
   <data name="DivisionOneMessage" xml:space="preserve">
     <value>Для деления на однозначное число разбиваем исходное многозначное число на удобные части, которые точно будут делиться на однозначное.</value>
