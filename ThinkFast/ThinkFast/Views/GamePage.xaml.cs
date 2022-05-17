@@ -1,5 +1,7 @@
 ﻿using System;
 using ThinkFast.Models;
+using ThinkFast.Models.Games;
+using ThinkFast.Models.Games.LevelTypes;
 using ThinkFast.Resources;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,9 +16,12 @@ namespace ThinkFast.Views
         private static int b = 160;
         private Label answer;
         private readonly Color color;
-        private Example example;
+        private GameExample example;
         private ProgressBar progressBar;
         private Label question;
+        private LevelType levelType;
+        private int levelId = 1;
+        private int step = 0;
 
 
         public GamePage()
@@ -26,6 +31,7 @@ namespace ThinkFast.Views
             g = 144;
             b = 160;
             color = Color.FromRgb(r, g, b);
+            levelType = LevelType.Get(levelId);
             StartGame();
         }
 
@@ -40,7 +46,18 @@ namespace ThinkFast.Views
         {
             progressBar.Progress = 0;
             progressBar.ProgressColor = color;
-            progressBar.Animate("SetProgress", arg => { progressBar.Progress = arg; }, 8 * 60, 8 * 1000, Easing.Linear,
+            progressBar.Animate("SetProgress", arg =>
+                {
+                    progressBar.Progress = arg;
+                    var three = 1.0 / 3.0;
+                    var two = 1.0 / 1.5;
+                    progressBar.ProgressColor = arg < three
+                        ? Color.Green
+                        : arg < two
+                            ? Color.Orange
+                            : Color.Red;
+
+                }, 8 * 60, levelType.LeadTime * 1000, Easing.Linear,
                 GetStack);
         }
 
@@ -56,7 +73,7 @@ namespace ThinkFast.Views
 
         private Grid GetGrid()
         {
-            example = ExampleCreator.CreateExample(1);
+            example = levelType.CreateExample();
 
             var grid = new Grid
             {
@@ -230,7 +247,16 @@ namespace ThinkFast.Views
 
             if (answer.Text == example.Answer)
             {
-                example = ExampleCreator.CreateExample(example.Step + 1);
+                step++;
+
+                if (step == 5 && levelId < 48)
+                {
+                    levelId++;
+                    step = 0;
+                    levelType = LevelType.Get(levelId);
+                }
+
+                example = levelType.CreateExample();
                 question.Text = example.Question;
                 answer.Text = string.Empty;
                 progressBar.AbortAnimation("SetProgress");
@@ -280,13 +306,12 @@ namespace ThinkFast.Views
             var messageStack = new StackLayout();
 
 
-            var answerMessage = example.GetSolution();
-            if (string.IsNullOrEmpty(answerMessage.Message))
+            if (!example.AnswerMessage.HasMessage)
             {
                 var solution = new Label
                 {
-                    Text = answerMessage.Solution,
-                    FontAttributes = FontAttributes.Bold,
+                    Text = example.AnswerMessage.Solution + example.Answer,
+                    TextColor = Color.FromHex("#757575"),
                     FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                     HorizontalOptions = LayoutOptions.Center
                 };
@@ -296,7 +321,9 @@ namespace ThinkFast.Views
             {
                 var message = new Label
                 {
-                    Text = answerMessage.Message, FontSize = Device.GetNamedSize(NamedSize.Body, typeof(Label)),
+                    Text = example.AnswerMessage.Message,
+                    TextColor = Color.FromHex("#767676"),
+                    FontSize = Device.GetNamedSize(NamedSize.Body, typeof(Label)),
                     HorizontalOptions = LayoutOptions.Center
                 };
                 var line = new BoxView
@@ -308,7 +335,8 @@ namespace ThinkFast.Views
 
                 var solution = new Label
                 {
-                    Text = answerMessage.Solution,
+                    Text = example.AnswerMessage.Solution + example.Answer,
+                    TextColor = Color.FromHex("#757575"),
                     FontAttributes = FontAttributes.Bold,
                     FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                     HorizontalOptions = LayoutOptions.Center

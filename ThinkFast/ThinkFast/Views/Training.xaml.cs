@@ -19,6 +19,7 @@ namespace ThinkFast.Views
         private Label answer;
         private readonly Color color;
         private Example example;
+        private Label help;
 
         private int firstRung;
         private Operation operation;
@@ -76,20 +77,25 @@ namespace ThinkFast.Views
 
         private void StartAnimate()
         {
-            //r = 112;
-            //g = 144;
-            //b = 160;
-            //color = Color.FromRgb(r, g, b);
+            Color GetRed()
+            {
+                help.Text = example.AnswerMessage.HasMessage ? example.AnswerMessage.Solution : string.Empty;
+                return Color.Red;
+            }
+
             progressBar.Progress = 0;
             progressBar.ProgressColor = color;
-            //progressBar.ProgressColor = Color.FromRgb(160, 184, 200);
             progressBar.Animate("SetProgress", arg =>
                 {
                     progressBar.Progress = arg;
-                    //r++;
-                    //g--;
-                    //b--;
-                    //progressBar.ProgressColor = Color.FromRgb(r, g, b);
+                    var three = 1.0 / 3.0;
+                    var two = 1.0 / 1.5;
+                    progressBar.ProgressColor = arg < three
+                        ? Color.Green
+                        : arg < two
+                            ? Color.Orange
+                            : GetRed();
+
                 }, 8 * 60, leadTime * 1000, Easing.Linear,
                 GetStack);
         }
@@ -132,10 +138,21 @@ namespace ThinkFast.Views
             question = new Label
             {
                 Text = $"{example.Question}",
+                TextColor = Color.FromHex("#6b6e72"),
                 FontSize = 34
             };
 
-            answer = new Label {FontSize = 34};
+            answer = new Label
+            {
+                FontSize = 34,
+                TextColor = Color.FromHex("#6b6e72")
+            };
+
+            help = new Label
+            {
+                FontSize = 16,
+                TextColor = Color.DarkGray
+            };
 
 
             var stackLayout = new StackLayout
@@ -144,6 +161,14 @@ namespace ThinkFast.Views
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 Orientation = StackOrientation.Horizontal
+            };
+
+            var cardStack = new StackLayout
+            {
+                Children = { stackLayout, help },
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                Orientation = StackOrientation.Vertical
             };
 
             progressBar = new ProgressBar {Progress = 0};
@@ -240,8 +265,8 @@ namespace ThinkFast.Views
             button0.Clicked += AnswerClicked;
             buttonClear.Clicked += ButtonClearOnClicked;
 
-            grid.Children.Add(stackLayout, 0, 1);
-            Grid.SetColumnSpan(stackLayout, 3);
+            grid.Children.Add(cardStack, 0, 1);
+            Grid.SetColumnSpan(cardStack, 3);
             grid.Children.Add(progressBar, 0, 2);
             Grid.SetColumnSpan(progressBar, 3);
 
@@ -326,12 +351,12 @@ namespace ThinkFast.Views
             var messageStack = new StackLayout();
 
 
-            var answerMessage = example.GetSolution();
-            if (string.IsNullOrEmpty(answerMessage.Message))
+            if (!example.AnswerMessage.HasMessage)
             {
                 var solution = new Label
                 {
-                    Text = answerMessage.Solution, FontAttributes = FontAttributes.Bold,
+                    Text = example.AnswerMessage.Solution + example.Answer,
+                    TextColor = Color.FromHex("#757575"),
                     FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                     HorizontalOptions = LayoutOptions.Center
                 };
@@ -341,7 +366,9 @@ namespace ThinkFast.Views
             {
                 var message = new Label
                 {
-                    Text = answerMessage.Message, FontSize = Device.GetNamedSize(NamedSize.Body, typeof(Label)),
+                    Text = example.AnswerMessage.Message,
+                    TextColor = Color.FromHex("#767676"),
+                    FontSize = Device.GetNamedSize(NamedSize.Body, typeof(Label)),
                     HorizontalOptions = LayoutOptions.Center
                 };
                 var line = new BoxView
@@ -353,7 +380,9 @@ namespace ThinkFast.Views
 
                 var solution = new Label
                 {
-                    Text = answerMessage.Solution, FontAttributes = FontAttributes.Bold,
+                    Text = example.AnswerMessage.Solution + example.Answer,
+                    TextColor = Color.FromHex("#757575"),
+                    FontAttributes = FontAttributes.Bold,
                     FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                     HorizontalOptions = LayoutOptions.Center
                 };

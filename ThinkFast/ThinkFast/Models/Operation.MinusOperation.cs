@@ -34,20 +34,20 @@ namespace ThinkFast.Models
                     {
                         case 7:
                         {
-                            var solution = $"{first} - {second} = {first} - {Ten} + 3 = {first - second}";
+                            var solution = $"{first} - {second} = {first} - {Ten} + 3 = ";
 
 
                             return new AnswerMessage(AppResources.Minus7Message, solution);
                         }
                         case 8:
                         {
-                            var solution = $"{first} - {second} = {first} - {Ten} + 2 = {first - second}";
+                            var solution = $"{first} - {second} = {first} - {Ten} + 2 = ";
 
                             return new AnswerMessage(AppResources.Minus8Message, solution);
                             }
                         case 9:
                         {
-                            var solution = $"{first} - {second} = {first} - {Ten} + 1 = {first - second}";
+                            var solution = $"{first} - {second} = {first} - {Ten} + 1 = ";
 
                             return new AnswerMessage(AppResources.Minus9Message, solution);
                             }
@@ -89,8 +89,6 @@ namespace ThinkFast.Models
 
                     temp = (long)(temp - b);
                 }
-
-                list.Add($"{first - second}");
 
                 var solution = string.Concat(list);
 

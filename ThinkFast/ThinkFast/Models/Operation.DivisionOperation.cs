@@ -39,28 +39,28 @@ namespace ThinkFast.Models
                 //    var s = $"{a} ÷ {second} + {first - a} ÷ {second}";
 
                 //    list.Add(s);
-                //    list.Add($"= {first / second}");
+                //    list.Add($"= ");
 
                 //    return string.Concat(list);
                 //}
 
                 if (second == 4)
                 {
-                    var solution = $"{first} {Symbol} {second} = {first / 2} {Symbol} {2} = {first / second}";
+                    var solution = $"{first} {Symbol} {second} = {first / 2} {Symbol} {2} = ";
 
                     return new AnswerMessage(AppResources.Division5Message, solution);
                 }
 
                 if (second == 5)
                 {
-                    var solution = $"{first} ÷ {second} = {first * 2} ÷ {Ten} = {first / second}";
+                    var solution = $"{first} ÷ {second} = {first * 2} ÷ {Ten} = ";
 
                     return new AnswerMessage(AppResources.Division5Message, solution);
                 }
 
                 if (second == 8)
                 {
-                    var solution = $"{first} {Symbol} {second} = {first / 2} {Symbol} {2} = {first / 2 / 2 } {Symbol} {2} = {first / second}";
+                    var solution = $"{first} {Symbol} {second} = {first / 2} {Symbol} {2} = {first / 2 / 2 } {Symbol} {2} = ";
 
                     return new AnswerMessage(AppResources.Division5Message, solution);
                 }
@@ -86,7 +86,7 @@ namespace ThinkFast.Models
             {
                 var list = new List<string>(4) {$"{first} ÷ {second} = "};
                 list.Add(DecisionDivision(first, second));
-                list.Add($"= {first / second}");
+                list.Add($"= ");
                 return string.Concat(list);
             }
 
@@ -94,7 +94,7 @@ namespace ThinkFast.Models
             {
                 var list = new List<string>(4) { $"{first} ÷ {second} = " };
                 list.Add(DecisionDivisionSmal(first, second));
-                list.Add($" = {first / second}");
+                list.Add($" = ");
                 return string.Concat(list);
             }
 

@@ -34,7 +34,7 @@ namespace ThinkFast.Models
                 {
                     var temp = second * Ten;
 
-                    var solution = $"{first} × {second} = {Ten} × {second} - {second} = {temp} - {second} = {first * second}";
+                    var solution = $"{first} × {second} = {Ten} × {second} - {second} = {temp} - {second} = ";
 
                     return new AnswerMessage(AppResources.Multiplication9Message, solution);
                 }
@@ -43,7 +43,7 @@ namespace ThinkFast.Models
                 {
                     var temp = first * Ten;
 
-                    var solution = $"{first} × {second} = {first} × {Ten} - {first} = {temp} - {first} = {first * second}";
+                    var solution = $"{first} × {second} = {first} × {Ten} - {first} = {temp} - {first} = ";
 
                     return new AnswerMessage(AppResources.Multiplication9Message, solution);
                 }
@@ -52,7 +52,7 @@ namespace ThinkFast.Models
                 {
                     var temp = second * Ten;
 
-                    var solution = $"{first} × {second} = {Ten} × {second} + {second} = {temp} + {second} = {first * second}";
+                    var solution = $"{first} × {second} = {Ten} × {second} + {second} = {temp} + {second} = ";
 
                     return new AnswerMessage(AppResources.Multiplication11Message, solution);
                 }
@@ -61,7 +61,7 @@ namespace ThinkFast.Models
                 {
                     var temp = first * Ten;
 
-                    var solution = $"{first} × {second} = {first} × {Ten} + {first} = {temp} + {first} = {first * second}";
+                    var solution = $"{first} × {second} = {first} × {Ten} + {first} = {temp} + {first} = ";
 
                     return new AnswerMessage(AppResources.Multiplication11Message, solution);
                 }
@@ -80,26 +80,26 @@ namespace ThinkFast.Models
                 {
                     if (second % 2 == 0)
                     {
-                        var solution = $"{first} × {second} = {Ten} × ({second} ÷ {2})  = {first * second}";
+                        var solution = $"{first} × {second} = {Ten} × ({second} ÷ {2})  = ";
 
                         return new AnswerMessage(AppResources.Multiplication5_2Message, solution);
                     }
 
-                    var solution2 = $"{first} × {second} = {Ten} × {second} ÷ {2} = {first * second}";
+                    var solution2 = $"{first} × {second} = {Ten} × {second} ÷ {2} = ";
 
-                    return new AnswerMessage(AppResources.Multiplication5Message, solution2); ;
+                    return new AnswerMessage(AppResources.Multiplication5Message, solution2); 
                 }
 
                 if (second == 5)
                 {
                     if (first % 2 == 0)
                     {
-                        var solution = $"{first} × {second} = {first} ÷ {2} × {Ten} = {first * second}";
+                        var solution = $"{first} × {second} = {first} ÷ {2} × {Ten} = ";
 
                         return new AnswerMessage(AppResources.Multiplication5_2Message, solution);
                     }
 
-                    var solution2 = $"{first} × {second} = {first} × {Ten} ÷ {2} = {first * second}";
+                    var solution2 = $"{first} × {second} = {first} × {Ten} ÷ {2} = ";
 
                     return new AnswerMessage(AppResources.Multiplication5Message, solution2); 
                 }
@@ -108,12 +108,12 @@ namespace ThinkFast.Models
                 {
                     if (second % 4 == 0)
                     {
-                        var solution = $"{first} × {second} = {100} × ({second} ÷ {4})  = {first * second}";
+                        var solution = $"{first} × {second} = {100} × ({second} ÷ {4})  = ";
 
                         return new AnswerMessage(AppResources.Multiplication25_4Message, solution);
                     }
 
-                    var solution2 = $"{first} × {second} = {100} × {second} ÷ {4}  = {first * second}";
+                    var solution2 = $"{first} × {second} = {100} × {second} ÷ {4}  = ";
 
                     return new AnswerMessage(AppResources.Multiplication25Message, solution2);
                 }
@@ -122,40 +122,40 @@ namespace ThinkFast.Models
                 {
                     if (first % 4 == 0)
                     {
-                        var solution = $"{first} × {second} = {first} ÷ {4} × {100} = {first * second}";
+                        var solution = $"{first} × {second} = {first} ÷ {4} × {100} = ";
 
                         return new AnswerMessage(AppResources.Multiplication25_4Message, solution);
                     }
 
-                    var solution2 = $"{first} × {second} = {first} × {100} ÷ {4} = {first * second}";
+                    var solution2 = $"{first} × {second} = {first} × {100} ÷ {4} = ";
 
                     return new AnswerMessage(AppResources.Multiplication25_4Message, solution2);
                 }
 
                 if (first == 4)
                 {
-                    var solution = $"{first} × {second} = {2} × {second * 2}  = {first * second}";
+                    var solution = $"{first} × {second} = {2} × {second * 2}  = ";
 
                     return new AnswerMessage(AppResources.Multiplication4Message, solution);
                 }
 
                 if (second == 4)
                 {
-                    var solution = $"{first} × {second} = {first * 2} × {2} = {first * second}";
+                    var solution = $"{first} × {second} = {first * 2} × {2} = ";
 
                     return new AnswerMessage(AppResources.Multiplication4Message, solution);
                 }
 
                 if (first == 8)
                 {
-                    var solution = $"{first} × {second} = {2} × {second * 2}  = {2} × {second * 2 * 2}  = {first * second}";
+                    var solution = $"{first} × {second} = {2} × {second * 2}  = {2} × {second * 2 * 2}  = ";
 
                     return new AnswerMessage(AppResources.Multiplication8Message, solution);
                 }
 
                 if (second == 8)
                 {
-                    var solution = $"{first} × {second} = {first * 2} × {2}= {first * 2 * 2} × {2} = {first * second}";
+                    var solution = $"{first} × {second} = {first * 2} × {2}= {first * 2 * 2} × {2} = ";
 
                     return new AnswerMessage(AppResources.Multiplication8Message, solution);
                 }
@@ -172,8 +172,6 @@ namespace ThinkFast.Models
                         var s = i != 0 ? $"{first} × {b} + " : $"{first} × {b} = ";
                         list.Add(s);
                     }
-
-                    list.Add($"{first * second}");
 
                     var solution = string.Concat(list);
 
@@ -193,8 +191,6 @@ namespace ThinkFast.Models
                         list.Add(s);
                     }
 
-                    list.Add($"{first * second}");
-
                     var solution = string.Concat(list);
 
                     return new AnswerMessage(AppResources.MultiplicationMultyOneMessage, solution);
@@ -213,8 +209,6 @@ namespace ThinkFast.Models
                         var s = i != 0 ? $"{first} × {b / pow} × {pow} + " : $"{first} × {b} = ";
                         list.Add(s);
                     }
-
-                    list.Add($"{first * second}");
 
                     var solution = string.Concat(list);
 

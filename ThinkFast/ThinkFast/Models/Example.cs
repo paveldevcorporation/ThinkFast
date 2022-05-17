@@ -14,6 +14,8 @@
             this.second = second;
             this.operation = operation;
             Step = step;
+            AnswerMessage = GetSolution();
+            Answer = operation.Calculate(first, second).ToString();
         }
 
         //public UnresolvedExample GetUnresolved()
@@ -31,9 +33,11 @@
 
         public string Question => $"{first} {operation.Symbol} {second} = ";
 
-        public string Answer => operation.Calculate(first, second).ToString();
+        public string Answer { get; }
 
         public int Step { get; }
+
+        public AnswerMessage AnswerMessage { get; }
 
 
         public override string ToString()

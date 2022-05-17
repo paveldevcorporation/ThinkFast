@@ -37,19 +37,19 @@ namespace ThinkFast.Models
                     {
                         case 7:
                         {
-                            var solution = $"{first} + {second} = {Ten} + {second} - 3 = {first + second}";
+                            var solution = $"{first} + {second} = {Ten} + {second} - 3 = ";
 
                             return new AnswerMessage(AppResources.Plus_7_8_9_Message, solution);
                         }
                         case 8:
                         {
-                            var solution = $"{first} + {second} = {Ten} + {second} - 2 = {first + second}";
+                            var solution = $"{first} + {second} = {Ten} + {second} - 2 = ";
 
                             return new AnswerMessage(AppResources.Plus_7_8_9_Message, solution);
                         }
                         case 9:
                         {
-                            var solution = $"{first} + {second} = {Ten} + {second} - 1 = {first + second}";
+                            var solution = $"{first} + {second} = {Ten} + {second} - 1 = ";
 
                             return new AnswerMessage(AppResources.Plus_7_8_9_Message, solution);
                         }
@@ -63,19 +63,19 @@ namespace ThinkFast.Models
                     {
                         case 7:
                         {
-                            var solution = $"{first} + {second} = {first} + {Ten} - 3 = {first + second}";
+                            var solution = $"{first} + {second} = {first} + {Ten} - 3 = ";
 
                             return new AnswerMessage(AppResources.Plus_7_8_9_Message, solution);
                             }
                         case 8:
                         {
-                            var solution = $"{first} + {second} = {first} + {Ten} - 2 = {first + second}";
+                            var solution = $"{first} + {second} = {first} + {Ten} - 2 = ";
 
                             return new AnswerMessage(AppResources.Plus_7_8_9_Message, solution);
                             }
                         case 9:
                         {
-                            var solution = $"{first} + {second} = {first} + {Ten} - 1 = {first + second}";
+                            var solution = $"{first} + {second} = {first} + {Ten} - 1 = ";
 
                             return new AnswerMessage(AppResources.Plus_7_8_9_Message, solution);
                             }
@@ -93,7 +93,7 @@ namespace ThinkFast.Models
                         var x = answer / 10 * 10;
                         var secondOne = x - first;
                         var secondTwo = answer - x;
-                        var solution = $"{first} + {second} = {first} + {secondOne} + {secondTwo} = {first + second}";
+                        var solution = $"{first} + {second} = {first} + {secondOne} + {secondTwo} = ";
 
                         return new AnswerMessage(AppResources.Addition1To20Rule, solution);
                     }
@@ -142,9 +142,7 @@ namespace ThinkFast.Models
                     var s = i != 0 ? $"({a} + {b}) + " : $"({a} + {b}) = ";
                     list.Add(s);
                 }
-
-                list.Add($"{first + second}");
-
+                
                 var solution = string.Concat(list);
 
                 return new AnswerMessage(AppResources.PlusMultiMessage, solution);
