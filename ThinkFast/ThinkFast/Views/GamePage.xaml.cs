@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Linq;
+using Microcharts;
+using Microcharts.Forms;
+using SkiaSharp;
 using ThinkFast.Models;
 using ThinkFast.Models.Games;
 using ThinkFast.Models.Games.LevelTypes;
@@ -22,6 +26,7 @@ namespace ThinkFast.Views
         private LevelType levelType;
         private int levelId = 1;
         private int step = 0;
+        private double points = 0;
 
 
         public GamePage()
@@ -67,6 +72,12 @@ namespace ThinkFast.Views
             {
                 return;
             }
+
+            var pointResult = new Result(points);
+            App.Database.Result.SaveItem(pointResult);
+
+            var exampleRepeat = new ExampleRepeat(example.First, example.Second, example.LevelType.Operation.Id);
+            App.Database.ExampleRepeat.SaveItem(exampleRepeat);
 
             GetStackLayout();
         }
@@ -247,6 +258,7 @@ namespace ThinkFast.Views
 
             if (answer.Text == example.Answer)
             {
+                points += (1 - progressBar.Progress) * 10 * levelType.PointCoefficient;
                 step++;
 
                 if (step == 5 && levelId < 48)
@@ -266,100 +278,123 @@ namespace ThinkFast.Views
 
         private void GetStackLayout()
         {
-            var frame = GetAnswerCard();
-
-            var button = new Button
+            ChartEntry GetChartEntry(Result x)
             {
-                Text = AppResources.Repeat,
-                BackgroundColor = color,
-                Margin = new Thickness(0, 16, 0, 0),
-                HorizontalOptions = LayoutOptions.Center,
-                WidthRequest = 130
+                return new ChartEntry((float)x.Points)
+                {
+                    Label = x.Date.ToShortDateString(),
+                    ValueLabel = x.Points.ToString("F0"),
+                    Color =  SKColor.Parse("#006C84")
+                };
+            }
+
+            var currentFrame = new Frame
+            {
+                WidthRequest = 50,
+                CornerRadius = 10
             };
-            button.Clicked += ButtonOnClicked;
+            var label = new Label
+            {
+                Text = AppResources.Score,
+                TextColor = Color.Gray,
+                HorizontalTextAlignment = TextAlignment.Center
+            };
+
+            var text = new Label
+            {
+                Text = points.ToString("F0"),
+                TextColor = Color.Gray,
+                HorizontalTextAlignment = TextAlignment.Center
+            }; 
+
+            
+
+            var currentStack = new StackLayout();
+            currentStack.Children.Add(label);
+            currentStack.Children.Add(text);
+            currentFrame.Content = currentStack;
+
+
+            var record = App.Database.Result.Max(x => x.Points);
+
+            var recordFrame = new Frame
+            {
+                WidthRequest = 50,
+                CornerRadius = 10
+            };
+            var recordLabel = new Label
+            {
+                Text = AppResources.Record,
+                TextColor = Color.Gray,
+                HorizontalTextAlignment = TextAlignment.Center
+            };
+
+            var recordText = new Label
+            {
+                Text = record.ToString("F0"),
+                TextColor = Color.Gray,
+                HorizontalTextAlignment = TextAlignment.Center
+            };
+
+
+
+            var recordStack = new StackLayout();
+            recordStack.Children.Add(recordLabel);
+            recordStack.Children.Add(recordText);
+            recordFrame.Content = recordStack;
+
+            var frameStack = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                HorizontalOptions = LayoutOptions.Center
+            };
+            frameStack.Children.Add(currentFrame);
+            frameStack.Children.Add(recordFrame);
+
+            var results = App.Database.Result.Get(null, 15);
+            var entries = results.OrderBy(x => x.Id).Select(GetChartEntry);
+            var chart = new ChartView
+            {
+                HeightRequest = 250,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                Chart = new LineChart
+                {
+                    Entries = entries,
+                    LineMode = LineMode.Spline,
+                    PointMode = PointMode.Circle,
+                    BackgroundColor = SKColor.Parse("#fafafa"),
+                    IsAnimated = true,
+                    LabelOrientation = Orientation.Vertical,
+                    ValueLabelOrientation = Orientation.Horizontal,
+                    LabelTextSize = (float)Device.GetNamedSize(NamedSize.Small, typeof(Label)),
+                }
+            };
 
             var goBackButton = new Button
             {
                 Text = AppResources.Back,
                 BackgroundColor = color,
-                Margin = new Thickness(0, 16, 0, 0),
+                CornerRadius = 20,
+                Margin = new Thickness(0, 16, 0, 16),
                 HorizontalOptions = LayoutOptions.Center,
                 WidthRequest = 130
             };
             goBackButton.Clicked += GoBackButtonOnClicked;
 
-            //var adMod = new NativeAdView();
-
             var stack = new StackLayout
             {
-                Children = {frame, button, goBackButton },
-                BackgroundColor = Color.FromRgb(232, 232, 240)
+                Children = { frameStack, chart, goBackButton },
+                BackgroundColor = Color.FromHex("#fafafa")
             };
 
             Content = stack;
-            DependencyService.Get<IAdInterstitial>().ShowAd();
-        }
-
-        private Frame GetAnswerCard()
-        {
-            var frame = new Frame {CornerRadius = 5, Padding = 8, BorderColor = color, Margin = new Thickness(10)};
-            var messageStack = new StackLayout();
-
-
-            if (!example.AnswerMessage.HasMessage)
-            {
-                var solution = new Label
-                {
-                    Text = example.AnswerMessage.Solution + example.Answer,
-                    TextColor = Color.FromHex("#757575"),
-                    FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
-                    HorizontalOptions = LayoutOptions.Center
-                };
-                frame.Content = solution;
-            }
-            else
-            {
-                var message = new Label
-                {
-                    Text = example.AnswerMessage.Message,
-                    TextColor = Color.FromHex("#767676"),
-                    FontSize = Device.GetNamedSize(NamedSize.Body, typeof(Label)),
-                    HorizontalOptions = LayoutOptions.Center
-                };
-                var line = new BoxView
-                {
-                    Color = color,
-                    HeightRequest = 2,
-                    HorizontalOptions = LayoutOptions.Fill
-                };
-
-                var solution = new Label
-                {
-                    Text = example.AnswerMessage.Solution + example.Answer,
-                    TextColor = Color.FromHex("#757575"),
-                    FontAttributes = FontAttributes.Bold,
-                    FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
-                    HorizontalOptions = LayoutOptions.Center
-                };
-
-                messageStack.Children.Add(message);
-                messageStack.Children.Add(line);
-                messageStack.Children.Add(solution);
-
-                frame.Content = messageStack;
-            }
-
-            return frame;
         }
 
         private void GoBackButtonOnClicked(object sender, EventArgs e)
         {
             Shell.Current.Navigation.PopModalAsync();
-        }
-
-        private void ButtonOnClicked(object sender, EventArgs e)
-        {
-            StartGame();
+            DependencyService.Get<IAdInterstitial>().ShowAd();
         }
     }
 }

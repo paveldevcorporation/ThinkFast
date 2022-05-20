@@ -1,4 +1,5 @@
 ﻿using System;
+using ThinkFast.Models.Operations;
 using ThinkFast.Resources;
 
 namespace ThinkFast.Models.Games.LevelTypes
@@ -8,7 +9,7 @@ namespace ThinkFast.Models.Games.LevelTypes
         private class MultiplicationFiveType : LevelType
         {
             public MultiplicationFiveType(int id, uint leadTime, float pointCoefficient)
-                : base(id, string.Empty, '×', leadTime, pointCoefficient)
+                : base(id, string.Empty, Operation.Multiply, leadTime, pointCoefficient)
             {
             }
 
@@ -16,12 +17,12 @@ namespace ThinkFast.Models.Games.LevelTypes
             {
                 if (first % 2 == 0)
                 {
-                    var solution = $"{first} {Symbol} {second} = {first} ÷ {2} {Symbol} {Ten} = ";
+                    var solution = $"{first} {Operation.Symbol} {second} = {first} ÷ {2} {Operation.Symbol} {Ten} = ";
 
                     return new AnswerMessage(AppResources.Multiplication5_2Message, solution);
                 }
 
-                var solution2 = $"{first} {Symbol} {second} = {first} {Symbol} {Ten} ÷ {2} = ";
+                var solution2 = $"{first} {Operation.Symbol} {second} = {first} {Operation.Symbol} {Ten} ÷ {2} = ";
 
                 return new AnswerMessage(AppResources.Multiplication5Message, solution2);
             }

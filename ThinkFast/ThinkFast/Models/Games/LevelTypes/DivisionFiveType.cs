@@ -1,4 +1,5 @@
 ﻿using System;
+using ThinkFast.Models.Operations;
 using ThinkFast.Resources;
 
 namespace ThinkFast.Models.Games.LevelTypes
@@ -8,13 +9,13 @@ namespace ThinkFast.Models.Games.LevelTypes
         private class DivisionFiveType : LevelType
         {
             public DivisionFiveType(int id, uint leadTime, float pointCoefficient)
-                : base(id, string.Empty, '÷', leadTime, pointCoefficient)
+                : base(id, string.Empty, Operation.Division, leadTime, pointCoefficient)
             {
             }
 
             public override AnswerMessage GetSolution(long first, long second)
             {
-                var solution = $"{first} {Symbol} {second} = {first * 2} {Symbol} {Ten} = ";
+                var solution = $"{first} {Operation.Symbol} {second} = {first * 2} {Operation.Symbol} {Ten} = ";
 
                 return new AnswerMessage(AppResources.Division5Message, solution);
             }

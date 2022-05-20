@@ -1,4 +1,5 @@
-﻿using ThinkFast.Resources;
+﻿using ThinkFast.Models.Operations;
+using ThinkFast.Resources;
 
 namespace ThinkFast.Models.Games.LevelTypes
 {
@@ -7,7 +8,7 @@ namespace ThinkFast.Models.Games.LevelTypes
         private class Addition789Type : LevelType
         {
             public Addition789Type(int id, uint leadTime, float pointCoefficient)
-                : base(id, string.Empty, '+', leadTime, pointCoefficient)
+                : base(id, string.Empty, Operation.Plus, leadTime, pointCoefficient)
             {
             }
 

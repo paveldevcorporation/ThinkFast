@@ -10,10 +10,18 @@
              BackgroundColor="#D0E0F0"
              Title="{resources:Translate Combo}">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout x:Name="GameStack">
+            <Button x:Name="Repeat"
+                Margin="0,16,0,0" Text="{resources:Translate Repeat}"
+                    HorizontalOptions="Center"
+                    Clicked="RepeatButtonOnClicked"
+                    IsVisible="False"
+                    
+            />
             <Button Margin="0,16,0,0" Text="{resources:Translate Play}"
                     HorizontalOptions="Center"
-                    Clicked="StartGame"/>
+                    Clicked="StartGame"
+            />
             <views:NativeAdView HeightRequest="280"  VerticalOptions="EndAndExpand"/>
 
         </StackLayout>

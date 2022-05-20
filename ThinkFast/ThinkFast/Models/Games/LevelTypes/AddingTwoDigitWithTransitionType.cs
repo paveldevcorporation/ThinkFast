@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ThinkFast.Models.Operations;
 using ThinkFast.Resources;
 
 namespace ThinkFast.Models.Games.LevelTypes
@@ -9,7 +10,7 @@ namespace ThinkFast.Models.Games.LevelTypes
         private class AddingTwoDigitWithTransitionType : LevelType
         {
             public AddingTwoDigitWithTransitionType(int id, uint leadTime, float pointCoefficient)
-                : base(id, string.Empty, '+', leadTime, pointCoefficient)
+                : base(id, string.Empty, Operation.Plus, leadTime, pointCoefficient)
             {
             }
 

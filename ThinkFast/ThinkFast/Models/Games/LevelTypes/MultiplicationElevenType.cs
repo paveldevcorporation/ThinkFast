@@ -1,4 +1,5 @@
 ﻿using System;
+using ThinkFast.Models.Operations;
 using ThinkFast.Resources;
 
 namespace ThinkFast.Models.Games.LevelTypes
@@ -8,7 +9,7 @@ namespace ThinkFast.Models.Games.LevelTypes
         private class MultiplicationElevenType : LevelType
         {
             public MultiplicationElevenType(int id, uint leadTime, float pointCoefficient)
-                : base(id, string.Empty, '×', leadTime, pointCoefficient)
+                : base(id, string.Empty, Operation.Multiply, leadTime, pointCoefficient)
             {
             }
 
@@ -16,7 +17,7 @@ namespace ThinkFast.Models.Games.LevelTypes
             {
 	            var temp = first * Ten;
 
-	            var solution = $"{first} {Symbol} {second} = {first} {Symbol} {Ten} + {first} = {temp} + {first} = ";
+	            var solution = $"{first} {Operation.Symbol} {second} = {first} {Operation.Symbol} {Ten} + {first} = {temp} + {first} = ";
 
 	            return new AnswerMessage(AppResources.Multiplication11Message, solution);
             }

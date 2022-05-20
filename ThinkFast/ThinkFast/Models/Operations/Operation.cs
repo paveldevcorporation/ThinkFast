@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ThinkFast.Models
+namespace ThinkFast.Models.Operations
 {
     public abstract partial class Operation
     {

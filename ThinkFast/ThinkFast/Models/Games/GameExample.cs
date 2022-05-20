@@ -5,30 +5,31 @@ namespace ThinkFast.Models.Games
 {
     public sealed class GameExample
     {
-        private readonly long first;
 
-        private readonly long second;
-
-        private readonly LevelType levelType;
 
         public GameExample(long first, long second, LevelType levelType)
         {
-            this.first = first;
-            this.second = second;
-            this.levelType = levelType;
+            First = first;
+            Second = second;
+            LevelType = levelType;
             AnswerMessage = GetSolution();
             Answer = levelType.Calculate(first, second).ToString();
         }
 
         private AnswerMessage GetSolution()
         {
-            var solution = levelType.GetSolution(first, second);
+            var solution = LevelType.GetSolution(First, Second);
 
             return solution ?? new AnswerMessage(string.Empty, ToString());
         }
 
+        public long First { get; }
 
-        public string Question => $"{first} {levelType.Symbol} {second} = ";
+        public long Second { get; }
+
+        public LevelType LevelType { get; }
+
+        public string Question => $"{First} {LevelType.Operation.Symbol} {Second} = ";
 
         public string Answer { get;  }
 
@@ -36,7 +37,7 @@ namespace ThinkFast.Models.Games
 
         public override string ToString()
         {
-            return $"{first} {levelType.Symbol} {second} = {Answer}";
+            return $"{First} {LevelType.Operation.Symbol} {Second} = {Answer}";
         }
     }
 }

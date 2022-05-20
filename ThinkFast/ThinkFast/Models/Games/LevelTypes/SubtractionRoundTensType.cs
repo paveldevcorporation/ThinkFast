@@ -1,4 +1,5 @@
 ﻿using System;
+using ThinkFast.Models.Operations;
 
 namespace ThinkFast.Models.Games.LevelTypes
 {
@@ -7,7 +8,7 @@ namespace ThinkFast.Models.Games.LevelTypes
         private class SubtractionRoundTensType : LevelType
         {
             public SubtractionRoundTensType(int id, uint leadTime, float pointCoefficient)
-                : base(id, string.Empty, '-', leadTime, pointCoefficient)
+                : base(id, string.Empty, Operation.Minus, leadTime, pointCoefficient)
             {
             }
 

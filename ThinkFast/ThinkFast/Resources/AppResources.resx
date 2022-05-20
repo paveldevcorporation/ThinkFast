@@ -204,11 +204,17 @@
   <data name="PupsoCount" xml:space="preserve">
     <value>PupsoCount</value>
   </data>
+  <data name="Record" xml:space="preserve">
+    <value>Record</value>
+  </data>
   <data name="Repeat" xml:space="preserve">
     <value>Repeat</value>
   </data>
   <data name="Rules" xml:space="preserve">
     <value>Rules</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>Score</value>
   </data>
   <data name="Subtraction1To20Rule" xml:space="preserve">
     <value>Decompose the subtractible into convenient terms (first subtract such a number so that it turns out to be round, then the remaining part)</value>

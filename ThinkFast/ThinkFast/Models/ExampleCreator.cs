@@ -1,4 +1,5 @@
 ﻿using System;
+using ThinkFast.Models.Operations;
 
 namespace ThinkFast.Models
 {
@@ -31,7 +32,7 @@ namespace ThinkFast.Models
             return operation.CreateExample(first, second, step);
         }
 
-        public static Example CreateExample(int rungFirst, int rungSecond, Operation operation)
+        public static Example CreateExample(int rungFirst, int rungSecond, Operation operation, int step = 1)
         {
             var random = new Random(DateTime.Now.Millisecond);
 
@@ -47,7 +48,7 @@ namespace ThinkFast.Models
             var first = random.Next(fMin, fMax);
             var second = random.Next(sMin, sMax);
 
-            return operation.CreateExample(first, second, 1);
+            return operation.CreateExample(first, second, step);
         }
 
         private static Operation GetMultiplyDivisionSymbols(Random random)

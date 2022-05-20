@@ -1,4 +1,5 @@
 ﻿using System;
+using ThinkFast.Models.Operations;
 using ThinkFast.Resources;
 
 namespace ThinkFast.Models.Games.LevelTypes
@@ -8,7 +9,7 @@ namespace ThinkFast.Models.Games.LevelTypes
         private class Subtraction789Type : LevelType
         {
             public Subtraction789Type(int id, uint leadTime, float pointCoefficient)
-                : base(id, string.Empty, '-', leadTime, pointCoefficient)
+                : base(id, string.Empty, Operation.Minus, leadTime, pointCoefficient)
             {
             }
 

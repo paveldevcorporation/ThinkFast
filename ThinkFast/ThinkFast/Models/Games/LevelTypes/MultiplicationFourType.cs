@@ -1,4 +1,5 @@
 ﻿using System;
+using ThinkFast.Models.Operations;
 using ThinkFast.Resources;
 
 namespace ThinkFast.Models.Games.LevelTypes
@@ -8,13 +9,13 @@ namespace ThinkFast.Models.Games.LevelTypes
         private class MultiplicationFourType : LevelType
         {
             public MultiplicationFourType(int id, uint leadTime, float pointCoefficient)
-                : base(id, string.Empty, '×', leadTime, pointCoefficient)
+                : base(id, string.Empty, Operation.Multiply, leadTime, pointCoefficient)
             {
             }
 
             public override AnswerMessage GetSolution(long first, long second)
             {
-                var solution = $"{first} {Symbol} {second} = {first * 2} {Symbol} {2} = ";
+                var solution = $"{first} {Operation.Symbol} {second} = {first * 2} {Operation.Symbol} {2} = ";
 
                 return new AnswerMessage(AppResources.Multiplication4Message, solution);
             }

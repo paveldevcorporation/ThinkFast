@@ -204,11 +204,17 @@
   <data name="PupsoCount" xml:space="preserve">
     <value>ПупсоСчёт</value>
   </data>
+  <data name="Record" xml:space="preserve">
+    <value>Рекорд</value>
+  </data>
   <data name="Repeat" xml:space="preserve">
     <value>Повтор</value>
   </data>
   <data name="Rules" xml:space="preserve">
     <value>Правила</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>Счет</value>
   </data>
   <data name="Subtraction1To20Rule" xml:space="preserve">
     <value>Разложи вычитаемое на удобные слагаемые (сначала вычти такое число, чтобы получилось круглое, затем оставшуюся часть)</value>

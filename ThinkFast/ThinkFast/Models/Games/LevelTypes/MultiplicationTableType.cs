@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using ThinkFast.Models.Operations;
 using ThinkFast.Services;
 
 namespace ThinkFast.Models.Games.LevelTypes
@@ -14,7 +15,7 @@ namespace ThinkFast.Models.Games.LevelTypes
             private readonly int firstNumber;
 
             public MultiplicationTableType(int id, uint leadTime, int first, float pointCoefficient)
-                : base(id, string.Empty, '×', leadTime, pointCoefficient)
+                : base(id, string.Empty, Operation.Multiply, leadTime, pointCoefficient)
             {
                 firstNumber = first;
             }
@@ -52,7 +53,7 @@ namespace ThinkFast.Models.Games.LevelTypes
 
                 foreach (var second in seconds)
                 {
-                    list.Append($"{firstNumber} {Symbol} {second} = {firstNumber * second}\n");
+                    list.Append($"{firstNumber} {Operation.Symbol} {second} = {firstNumber * second}\n");
                 }
                 seconds.Shuffle();
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using ThinkFast.Resources;
+using ThinkFast.Models.Operations;
 
 namespace ThinkFast.Models.Games.LevelTypes
 {
@@ -8,7 +9,7 @@ namespace ThinkFast.Models.Games.LevelTypes
         private class Multiplication25Type : LevelType
         {
             public Multiplication25Type(int id, uint leadTime, float pointCoefficient)
-                : base(id, string.Empty, '×', leadTime, pointCoefficient)
+                : base(id, string.Empty, Operation.Multiply, leadTime, pointCoefficient)
             {
             }
 
@@ -16,12 +17,12 @@ namespace ThinkFast.Models.Games.LevelTypes
             {
 	            if (first % 4 == 0)
 	            {
-		            var solution = $"{first} {Symbol} {second} = {first} ÷ {4} {Symbol} {100} = ";
+		            var solution = $"{first} {Operation.Symbol} {second} = {first} ÷ {4} {Operation.Symbol} {100} = ";
 
 		            return new AnswerMessage(AppResources.Multiplication25_4Message, solution);
 	            }
 
-	            var solution2 = $"{first} {Symbol} {second} = {first} {Symbol} {100} ÷ {4} = ";
+	            var solution2 = $"{first} {Operation.Symbol} {second} = {first} {Operation.Symbol} {100} ÷ {4} = ";
 
 	            return new AnswerMessage(AppResources.Multiplication25Message, solution2);
             }

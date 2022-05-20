@@ -1,4 +1,5 @@
-﻿using ThinkFast.Services;
+﻿using ThinkFast.Models.Operations;
+using ThinkFast.Services;
 
 namespace ThinkFast.Models.Games.LevelTypes
 {
@@ -10,7 +11,7 @@ namespace ThinkFast.Models.Games.LevelTypes
             private static readonly int[] seconds = GetNumbers(9);
             
             public SubtractionFrom10Type(int id, uint leadTime, float pointCoefficient)
-                : base(id, string.Empty, '-', leadTime, pointCoefficient)
+                : base(id, string.Empty, Operation.Minus, leadTime, pointCoefficient)
             {
             }
 

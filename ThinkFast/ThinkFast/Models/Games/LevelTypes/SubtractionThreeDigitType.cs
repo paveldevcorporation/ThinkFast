@@ -7,9 +7,9 @@ namespace ThinkFast.Models.Games.LevelTypes
 {
     public abstract partial class LevelType
     {
-        private class SubtractionTwoDigitType : LevelType
+        private class SubtractionThreeDigitType : LevelType
         {
-            public SubtractionTwoDigitType(int id, uint leadTime, float pointCoefficient)
+            public SubtractionThreeDigitType(int id, uint leadTime, float pointCoefficient)
                 : base(id, string.Empty, Operation.Minus, leadTime, pointCoefficient)
             {
             }
@@ -55,14 +55,13 @@ namespace ThinkFast.Models.Games.LevelTypes
             {
                 var random = new Random(DateTime.Now.Millisecond);
 
-                const int maxValue = 99;
-                const int minValue = 10;
+                const int maxValue = 999;
+                const int minValue = 100;
                 var first = random.Next(minValue, maxValue);
                 var second = random.Next(minValue, maxValue);
+                var sum = first + second;
 
-                return first >= second
-                    ? new GameExample(first, second, this)
-                    : new GameExample(second, first, this);
+                return new GameExample(sum, second, this);
             }
 
             public override string[] Rules => new[] { AppResources.MinusMultiMessage };

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using ThinkFast.Resources;
 
-namespace ThinkFast.Models
+namespace ThinkFast.Models.Operations
 {
     public abstract partial class Operation
     {

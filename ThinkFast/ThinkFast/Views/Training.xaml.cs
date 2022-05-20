@@ -1,5 +1,6 @@
 ﻿using System;
 using ThinkFast.Models;
+using ThinkFast.Models.Operations;
 using ThinkFast.Resources;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -55,7 +56,7 @@ namespace ThinkFast.Views
             set
             {
                 var id = int.Parse(Uri.UnescapeDataString(value));
-                operation = Models.Operation.Get(id);
+                operation = Models.Operations.Operation.Get(id);
             }
         }
 
@@ -305,7 +306,8 @@ namespace ThinkFast.Views
 
             if (answer.Text == example.Answer)
             {
-                example = ExampleCreator.CreateExample(firstRung, secondRung, operation);
+                var nextStep = example.Step + 1;
+                example = ExampleCreator.CreateExample(firstRung, secondRung, operation, nextStep);
                 question.Text = example.Question;
                 answer.Text = string.Empty;
                 progressBar.AbortAnimation("SetProgress");
@@ -315,6 +317,12 @@ namespace ThinkFast.Views
 
         private void GetStackLayout()
         {
+            if(example.Step>1)
+            {
+                var exampleRepeat = new ExampleRepeat(example.First, example.Second, example.Operation.Id);
+                App.Database.ExampleRepeat.SaveItem(exampleRepeat);
+            }
+
             var frame = GetAnswerCard();
 
             var button = new Button
@@ -333,16 +341,15 @@ namespace ThinkFast.Views
             };
             goBackButton.Clicked += GoBackButtonOnClicked;
 
-            //var adMod = new NativeAdView();
+            var adMod = new NativeAdView();
 
             var stack = new StackLayout
             {
-                Children = {frame, button, goBackButton },
+                Children = {frame, button, goBackButton, adMod },
                 BackgroundColor = Color.FromRgb(232, 232, 240)
             };
 
             Content = stack;
-            DependencyService.Get<IAdInterstitial>().ShowAd();
         }
 
         private Frame GetAnswerCard()
@@ -400,6 +407,8 @@ namespace ThinkFast.Views
         private void GoBackButtonOnClicked(object sender, EventArgs e)
         {
             Shell.Current.Navigation.PopModalAsync();
+
+            DependencyService.Get<IAdInterstitial>().ShowAd();
         }
 
         private void ButtonOnClicked(object sender, EventArgs e)

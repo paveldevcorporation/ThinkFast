@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ThinkFast.Models.Operations;
 using ThinkFast.Services;
 
 namespace ThinkFast.Models.Games.LevelTypes
@@ -36,7 +37,7 @@ namespace ThinkFast.Models.Games.LevelTypes
             }
 
             public Subtraction10To20Type(int id, uint leadTime, float pointCoefficient)
-                : base(id, string.Empty, '-', leadTime, pointCoefficient)
+                : base(id, string.Empty, Operation.Minus, leadTime, pointCoefficient)
             {
             }
 

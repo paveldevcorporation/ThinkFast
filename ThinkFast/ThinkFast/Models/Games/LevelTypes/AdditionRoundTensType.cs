@@ -1,11 +1,13 @@
-﻿namespace ThinkFast.Models.Games.LevelTypes
+﻿using ThinkFast.Models.Operations;
+
+namespace ThinkFast.Models.Games.LevelTypes
 {
     public abstract partial class LevelType
     {
         private class AdditionRoundTensType : LevelType
         {
             public AdditionRoundTensType(int id, uint leadTime, float pointCoefficient)
-                : base(id, string.Empty, '+', leadTime, pointCoefficient)
+                : base(id, string.Empty, Operation.Plus, leadTime, pointCoefficient)
             {
             }
 

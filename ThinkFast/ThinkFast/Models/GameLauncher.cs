@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using ThinkFast.Models.Operations;
 using Xamarin.Forms;
 
 namespace ThinkFast.Models

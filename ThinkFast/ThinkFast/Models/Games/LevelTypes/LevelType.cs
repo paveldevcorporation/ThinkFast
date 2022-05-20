@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ThinkFast.Models.Operations;
 using ThinkFast.Services;
 
 namespace ThinkFast.Models.Games.LevelTypes
@@ -47,20 +48,22 @@ namespace ThinkFast.Models.Games.LevelTypes
         public static readonly LevelType Division9Table = new DivisionTableType(32, Ten, 9, 1.3f);
         public static readonly LevelType Division10Table = new DivisionTableType(33, Ten, 10, 1.3f);
         public static readonly LevelType AddingTwoDigitWithTransition = new AddingTwoDigitWithTransitionType(34, Thirty, 1.4f);
-        public static readonly LevelType AddingThreeDigitWithin1000 = new AddingThreeDigitWithin1000Type(35, Thirty, 1.5f);
-        public static readonly LevelType MultiplicationFour = new MultiplicationFourType(36, Thirty, 1.6f);
-        public static readonly LevelType MultiplicationFive = new MultiplicationFiveType(37, Thirty, 1.6f);
-        public static readonly LevelType MultiplicationEight = new MultiplicationEightType(38, Thirty, 1.6f);
-        public static readonly LevelType MultiplicationNine = new MultiplicationNineType(39, Thirty, 1.6f);
-        public static readonly LevelType MultiplicationMultiOne = new MultiplicationMultiOneType(40, Thirty, 2f);
-        public static readonly LevelType AddingThreeDigitWithTransition = new AddingThreeDigitWithTransitionType(41, Thirty, 2);
-        public static readonly LevelType DivisionFour = new DivisionFourType(42, Forty, 2f);
-        public static readonly LevelType DivisionFive = new DivisionFiveType(43, Forty, 2f);
-        public static readonly LevelType DivisionEight = new DivisionEightType(44, Forty, 2f);
-        public static readonly LevelType MultiplicationEleven = new MultiplicationElevenType(45, Forty, 2f);
-        public static readonly LevelType Multiplication25 = new Multiplication25Type(46, 50, 2f);
-        public static readonly LevelType MultiplicationTwoDigit = new MultiplicationTwoDigitType(47, 60, 3f);
-        public static readonly LevelType MultiplicationThreeDigit = new MultiplicationThreeDigitType(48, 70, 4f);
+        public static readonly LevelType SubtractionThreeTwoDigit = new SubtractionThreeTwoDigitType(35, Thirty, 1.4f);
+        public static readonly LevelType AddingThreeDigitWithin1000 = new AddingThreeDigitWithin1000Type(36, Thirty, 1.5f);
+        public static readonly LevelType MultiplicationFour = new MultiplicationFourType(37, Thirty, 1.6f);
+        public static readonly LevelType MultiplicationFive = new MultiplicationFiveType(38, Thirty, 1.6f);
+        public static readonly LevelType MultiplicationEight = new MultiplicationEightType(39, Thirty, 1.6f);
+        public static readonly LevelType MultiplicationNine = new MultiplicationNineType(40, Thirty, 1.6f);
+        public static readonly LevelType MultiplicationMultiOne = new MultiplicationMultiOneType(41, Thirty, 2f);
+        public static readonly LevelType AddingThreeDigitWithTransition = new AddingThreeDigitWithTransitionType(42, Thirty, 2);
+        public static readonly LevelType SubtractionThreeDigit = new SubtractionThreeDigitType(43, Thirty, 2);
+        public static readonly LevelType DivisionFour = new DivisionFourType(44, Forty, 2f);
+        public static readonly LevelType DivisionFive = new DivisionFiveType(45, Forty, 2f);
+        public static readonly LevelType DivisionEight = new DivisionEightType(46, Forty, 2f);
+        public static readonly LevelType MultiplicationEleven = new MultiplicationElevenType(47, Forty, 2f);
+        public static readonly LevelType Multiplication25 = new Multiplication25Type(48, 50, 2f);
+        public static readonly LevelType MultiplicationTwoDigit = new MultiplicationTwoDigitType(49, 60, 3f);
+        public static readonly LevelType MultiplicationThreeDigit = new MultiplicationThreeDigitType(50, 70, 4f);
 
         private static readonly Dictionary<int, LevelType> Enumeration = Extract();
 
@@ -83,11 +86,11 @@ namespace ThinkFast.Models.Games.LevelTypes
 
         public virtual string[] Rules => Array.Empty<string>();
 
-        protected LevelType(int id, string name, char symbol, uint leadTime, float pointCoefficient)
+        protected LevelType(int id, string name, Operation operation, uint leadTime, float pointCoefficient)
         {
             Id = id;
             Name = name;
-            Symbol = symbol;
+            Operation = operation;
             LeadTime = leadTime;
             PointCoefficient = pointCoefficient;
         }
@@ -129,7 +132,7 @@ namespace ThinkFast.Models.Games.LevelTypes
         public float PointCoefficient { get; }
         public string Name { get; }
         public bool HasRules => Rules != null && Rules.Length > 0;
-        public char Symbol { get; }
+        public Operation Operation { get; }
         public uint LeadTime { get; }
 
 

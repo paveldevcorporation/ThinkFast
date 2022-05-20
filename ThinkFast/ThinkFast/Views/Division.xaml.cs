@@ -1,5 +1,6 @@
 ﻿using System;
 using ThinkFast.Models;
+using ThinkFast.Models.Operations;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
