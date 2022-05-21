@@ -16,23 +16,25 @@ namespace ThinkFast.Views
         public AllOperations()
         {
             InitializeComponent();
-
-            var countRepeat = App.Database.ExampleRepeat.Count();
-
-            if (countRepeat >= 10)
-            {
-                Repeat.IsVisible = true;
-            }
         }
 
-        private void RepeatButtonOnClicked(object sender, EventArgs e)
+        private async void RepeatButtonOnClicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            await Shell.Current.GoToAsync($"RepeatPage");
         }
 
         private async void StartGame(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync($"GamePage");
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            var countRepeat = App.Database.ExampleRepeat.Count(x => !x.Learned);
+
+            Repeat.IsVisible = countRepeat >= 25;
         }
     }
 }

@@ -133,6 +133,15 @@ namespace ThinkFast.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Excellent!.
+        /// </summary>
+        public static string Excellent {
+            get {
+                return ResourceManager.GetString("Excellent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Subtraction.
         /// </summary>
         public static string Minus {

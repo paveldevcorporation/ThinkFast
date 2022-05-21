@@ -1,72 +1,36 @@
 ﻿using System;
+using System.Linq;
 using ThinkFast.Models;
-using ThinkFast.Models.Operations;
 using ThinkFast.Resources;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ThinkFast.Views
 {
-    [QueryProperty("FirstRung", "firstRung")]
-    [QueryProperty("SecondRung", "secondRung")]
-    [QueryProperty("Operation", "operation")]
-    [QueryProperty("LeadTime", "leadTime")]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Training : ContentPage
+    public partial class RepeatPage : ContentPage
     {
-        private static int r = 112;
-        private static int g = 144;
-        private static int b = 160;
+        private readonly Color color = Color.FromRgb(112, 144, 160);
         private Label answer;
-        private readonly Color color;
         private Example example;
-        private Label help;
-
-        private int firstRung;
-        private Operation operation;
         private ProgressBar progressBar;
         private Label question;
-        private int secondRung;
+        private readonly ExampleRepeat[] repeats;
+        private readonly int countExample;
         private uint leadTime;
 
-
-        public Training()
+        public RepeatPage()
         {
-            r = 112;
-            g = 144;
-            b = 160;
-            color = Color.FromRgb(r, g, b);
-
             InitializeComponent();
-        }
 
-
-        public string FirstRung
-        {
-            set => firstRung = int.Parse(Uri.UnescapeDataString(value));
-        }
-
-        public string SecondRung
-        {
-            set => secondRung = int.Parse(Uri.UnescapeDataString(value));
-        }
-
-        public string Operation
-        {
-            set
+            repeats = App.Database.ExampleRepeat.Get(x => !x.Learned, 25).ToArray();
+            countExample = repeats.Length;
+            if (repeats == null || repeats.Length == 0)
             {
-                var id = int.Parse(Uri.UnescapeDataString(value));
-                operation = Models.Operations.Operation.Get(id);
+                repeats = App.Database.ExampleRepeat.Get(null, 25).ToArray();
             }
-        }
 
-        public string LeadTime
-        {
-            set
-            {
-                leadTime = uint.Parse(Uri.UnescapeDataString(value));
-                StartGame();
-            }
+            StartGame();
         }
 
         private void StartGame()
@@ -80,24 +44,23 @@ namespace ThinkFast.Views
         {
             Color GetRed()
             {
-                help.Text = example.AnswerMessage.HasMessage ? example.AnswerMessage.Solution : string.Empty;
                 return Color.Red;
             }
 
             progressBar.Progress = 0;
             progressBar.ProgressColor = color;
             progressBar.Animate("SetProgress", arg =>
-                {
-                    progressBar.Progress = arg;
-                    var three = 1.0 / 3.0;
-                    var two = 1.0 / 1.5;
-                    progressBar.ProgressColor = arg < three
-                        ? Color.Green
-                        : arg < two
-                            ? Color.Orange
-                            : GetRed();
+            {
+                progressBar.Progress = arg;
+                var three = 1.0 / 3.0;
+                var two = 1.0 / 1.5;
+                progressBar.ProgressColor = arg < three
+                    ? Color.Green
+                    : arg < two
+                        ? Color.Orange
+                        : GetRed();
 
-                }, 8 * 60, leadTime * 1000, Easing.Linear,
+            }, 8 * 60, leadTime * 1000, Easing.Linear,
                 GetStack);
         }
 
@@ -113,8 +76,9 @@ namespace ThinkFast.Views
 
         private Grid GetGrid()
         {
-            example = ExampleCreator.CreateExample(firstRung, secondRung, operation);
-
+            var repeat = repeats[0];
+            example = new Example(repeat.First, repeat.Second, repeat.Operation, 0);
+            leadTime = repeat.LeadTime > 0 ? repeat.LeadTime : 5;
             var grid = new Grid
             {
                 RowDefinitions =
@@ -148,17 +112,12 @@ namespace ThinkFast.Views
                 FontSize = 34,
                 TextColor = Color.FromHex("#6b6e72")
             };
-
-            help = new Label
-            {
-                FontSize = 16,
-                TextColor = Color.DarkGray
-            };
+            
 
 
             var stackLayout = new StackLayout
             {
-                Children = {question, answer},
+                Children = { question, answer },
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 Orientation = StackOrientation.Horizontal
@@ -166,13 +125,13 @@ namespace ThinkFast.Views
 
             var cardStack = new StackLayout
             {
-                Children = { stackLayout, help },
+                Children = { stackLayout },
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 Orientation = StackOrientation.Vertical
             };
 
-            progressBar = new ProgressBar {Progress = 0};
+            progressBar = new ProgressBar { Progress = 0 };
 
             var button1 = new Button
             {
@@ -300,15 +259,40 @@ namespace ThinkFast.Views
 
         private void AnswerClicked(object sender, EventArgs e)
         {
-            var button = (Button) sender;
+            var button = (Button)sender;
 
             answer.Text += button.Text;
 
             if (answer.Text == example.Answer)
             {
-                help.Text = string.Empty;
+                if(progressBar.Progress<0.65)
+                {
+                    var repeat = repeats[example.Step];
+                    repeat.Learn();
+                    App.Database.ExampleRepeat.SaveItem(repeat);
+                }
+
                 var nextStep = example.Step + 1;
-                example = ExampleCreator.CreateExample(firstRung, secondRung, operation, nextStep);
+                if (nextStep >= countExample)
+                {
+                    Content = new Label
+                    {
+                        TextColor = Color.Gray,
+                        FontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label)),
+                        Text = AppResources.Excellent,
+                        HorizontalOptions = LayoutOptions.CenterAndExpand,
+                        VerticalOptions = LayoutOptions.CenterAndExpand
+                    };
+
+                    Device.StartTimer(TimeSpan.FromSeconds(2), EndGame);
+
+                    
+                    return;
+                }
+
+                var nextRepeat = repeats[nextStep];
+                leadTime = nextRepeat.LeadTime > 0 ? nextRepeat.LeadTime : 5;
+                example = new Example(nextRepeat.First, nextRepeat.Second, nextRepeat.Operation, nextStep);
                 question.Text = example.Question;
                 answer.Text = string.Empty;
                 progressBar.AbortAnimation("SetProgress");
@@ -316,26 +300,31 @@ namespace ThinkFast.Views
             }
         }
 
+        private bool EndGame()
+        {
+            Shell.Current.Navigation.PopModalAsync();
+            DependencyService.Get<IAdInterstitial>().ShowAd();
+            return false;
+        }
+
         private void GetStackLayout()
         {
-            if(example.Step>1)
-            {
-                var exampleRepeat = new ExampleRepeat(example.First, example.Second, example.Operation.Id, leadTime);
-                App.Database.ExampleRepeat.SaveItem(exampleRepeat);
-            }
-
             var frame = GetAnswerCard();
 
             var button = new Button
             {
-                Text = AppResources.Repeat, BackgroundColor = color,
-                Margin = new Thickness(0, 16, 0, 0), HorizontalOptions = LayoutOptions.Center, WidthRequest = 130
+                Text = AppResources.Repeat,
+                BackgroundColor = color,
+                Margin = new Thickness(0, 16, 0, 0),
+                HorizontalOptions = LayoutOptions.Center,
+                WidthRequest = 130
             };
             button.Clicked += ButtonOnClicked;
 
             var goBackButton = new Button
             {
-                Text = AppResources.Back, BackgroundColor = color,
+                Text = AppResources.Back,
+                BackgroundColor = color,
                 Margin = new Thickness(0, 16, 0, 0),
                 HorizontalOptions = LayoutOptions.Center,
                 WidthRequest = 130
@@ -346,7 +335,7 @@ namespace ThinkFast.Views
 
             var stack = new StackLayout
             {
-                Children = {frame, button, goBackButton, adMod },
+                Children = { frame, button, goBackButton, adMod },
                 BackgroundColor = Color.FromRgb(232, 232, 240)
             };
 
@@ -355,7 +344,7 @@ namespace ThinkFast.Views
 
         private Frame GetAnswerCard()
         {
-            var frame = new Frame {CornerRadius = 5, Padding = 8, BorderColor = color, Margin = new Thickness(10)};
+            var frame = new Frame { CornerRadius = 5, Padding = 8, BorderColor = color, Margin = new Thickness(10) };
             var messageStack = new StackLayout();
 
 

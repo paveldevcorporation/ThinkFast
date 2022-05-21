@@ -23,6 +23,13 @@ namespace ThinkFast.Views
         private GameExample example;
         private ProgressBar progressBar;
         private Label question;
+        private Label score;
+        private Label scoreLabel = new Label
+        {
+            FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
+            TextColor = Color.FromHex("#6b6e72"),
+            Text = $"{AppResources.Score}: "
+        };
         private LevelType levelType;
         private int levelId = 1;
         private int step = 0;
@@ -76,7 +83,7 @@ namespace ThinkFast.Views
             var pointResult = new Result(points);
             App.Database.Result.SaveItem(pointResult);
 
-            var exampleRepeat = new ExampleRepeat(example.First, example.Second, example.LevelType.Operation.Id);
+            var exampleRepeat = new ExampleRepeat(example.First, example.Second, example.LevelType.Operation.Id, example.LevelType.LeadTime);
             App.Database.ExampleRepeat.SaveItem(exampleRepeat);
 
             GetStackLayout();
@@ -110,18 +117,45 @@ namespace ThinkFast.Views
             question = new Label
             {
                 Text = $"{example.Question}",
+                TextColor = Color.FromHex("#6b6e72"),
                 FontSize = 34
             };
 
-            answer = new Label {FontSize = 34};
+            answer = new Label
+            {
+                FontSize = 34,
+                TextColor = Color.FromHex("#6b6e72"),
+            };
+
+            score = new Label
+            {
+                FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
+                TextColor = Color.FromHex("#6b6e72"),
+                Text = "0"
+            };
+
+            var scoreStack = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                VerticalOptions = LayoutOptions.Start,
+                HorizontalOptions = LayoutOptions.StartAndExpand,
+                Children = { scoreLabel, score },
+                Margin = new Thickness(10)
+            };
 
 
             var stackLayout = new StackLayout
             {
                 Children = {question, answer},
-                VerticalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 Orientation = StackOrientation.Horizontal
+            };
+
+            var stack = new StackLayout
+            {
+                Orientation = StackOrientation.Vertical,
+                Children = {scoreStack, stackLayout}
             };
 
             progressBar = new ProgressBar {Progress = 0};
@@ -218,8 +252,8 @@ namespace ThinkFast.Views
             button0.Clicked += AnswerClicked;
             buttonClear.Clicked += ButtonClearOnClicked;
 
-            grid.Children.Add(stackLayout, 0, 1);
-            Grid.SetColumnSpan(stackLayout, 3);
+            grid.Children.Add(stack, 0, 1);
+            Grid.SetColumnSpan(stack, 3);
             grid.Children.Add(progressBar, 0, 2);
             Grid.SetColumnSpan(progressBar, 3);
 
@@ -259,6 +293,7 @@ namespace ThinkFast.Views
             if (answer.Text == example.Answer)
             {
                 points += (1 - progressBar.Progress) * 10 * levelType.PointCoefficient;
+                score.Text = points.ToString("F0");
                 step++;
 
                 if (step == 5 && levelId < 48)
@@ -287,16 +322,19 @@ namespace ThinkFast.Views
                     Color =  SKColor.Parse("#006C84")
                 };
             }
-
+            
             var currentFrame = new Frame
             {
-                WidthRequest = 50,
-                CornerRadius = 10
+                WidthRequest = Device.Info.ScaledScreenSize.Width / 3,
+                CornerRadius = 10,
+                BackgroundColor = Color.FromHex("#f1f1f1"),
+                Margin = new Thickness(20, 10)
             };
             var label = new Label
             {
                 Text = AppResources.Score,
                 TextColor = Color.Gray,
+                FontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label)),
                 HorizontalTextAlignment = TextAlignment.Center
             };
 
@@ -304,6 +342,7 @@ namespace ThinkFast.Views
             {
                 Text = points.ToString("F0"),
                 TextColor = Color.Gray,
+                FontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label)),
                 HorizontalTextAlignment = TextAlignment.Center
             }; 
 
@@ -319,13 +358,16 @@ namespace ThinkFast.Views
 
             var recordFrame = new Frame
             {
-                WidthRequest = 50,
-                CornerRadius = 10
+                WidthRequest = Device.Info.ScaledScreenSize.Width / 3,
+                CornerRadius = 10,
+                BackgroundColor = Color.FromHex("#f1f1f1"),
+                Margin = new Thickness(20, 10)
             };
             var recordLabel = new Label
             {
                 Text = AppResources.Record,
                 TextColor = Color.Gray,
+                FontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label)),
                 HorizontalTextAlignment = TextAlignment.Center
             };
 
@@ -333,6 +375,7 @@ namespace ThinkFast.Views
             {
                 Text = record.ToString("F0"),
                 TextColor = Color.Gray,
+                FontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label)),
                 HorizontalTextAlignment = TextAlignment.Center
             };
 
@@ -363,7 +406,7 @@ namespace ThinkFast.Views
                     Entries = entries,
                     LineMode = LineMode.Spline,
                     PointMode = PointMode.Circle,
-                    BackgroundColor = SKColor.Parse("#fafafa"),
+                    BackgroundColor = SKColor.Parse("#f1f1f1"),
                     IsAnimated = true,
                     LabelOrientation = Orientation.Vertical,
                     ValueLabelOrientation = Orientation.Horizontal,
@@ -371,12 +414,21 @@ namespace ThinkFast.Views
                 }
             };
 
+            var chartFrame = new Frame
+            {
+                WidthRequest = 50,
+                CornerRadius = 10,
+                BackgroundColor = Color.FromHex("#f1f1f1"),
+                Content = chart,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                Margin = new Thickness(10, 0)
+            };
+
             var goBackButton = new Button
             {
                 Text = AppResources.Back,
                 BackgroundColor = color,
-                CornerRadius = 20,
-                Margin = new Thickness(0, 16, 0, 16),
+                Margin = new Thickness(0, 0, 0, 16),
                 HorizontalOptions = LayoutOptions.Center,
                 WidthRequest = 130
             };
@@ -384,8 +436,8 @@ namespace ThinkFast.Views
 
             var stack = new StackLayout
             {
-                Children = { frameStack, chart, goBackButton },
-                BackgroundColor = Color.FromHex("#fafafa")
+                Children = { frameStack, chartFrame, goBackButton },
+                BackgroundColor = Color.FromHex("#e6e6e6")
             };
 
             Content = stack;

@@ -141,6 +141,9 @@
   <data name="DivisionOneMessage" xml:space="preserve">
     <value>Для деления на однозначное число разбиваем исходное многозначное число на удобные части, которые точно будут делиться на однозначное.</value>
   </data>
+  <data name="Excellent" xml:space="preserve">
+    <value>Oтлично!</value>
+  </data>
   <data name="Minus" xml:space="preserve">
     <value>Вычитание</value>
   </data>

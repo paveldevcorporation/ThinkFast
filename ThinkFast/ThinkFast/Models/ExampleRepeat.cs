@@ -11,11 +11,12 @@ namespace ThinkFast.Models
         {
         }
 
-        public ExampleRepeat(long first, long second, byte operationId)
+        public ExampleRepeat(long first, long second, byte operationId, uint leadTime)
         {
             First = first;
             Second = second;
             OperationId = operationId;
+            LeadTime = leadTime;
             AddDate = DateTime.Now;
             Learned = false;
         }
@@ -26,12 +27,13 @@ namespace ThinkFast.Models
             LearnedDate = DateTime.Now;
         }
 
-        public long First { get; }
-        public long Second { get; }
-        public byte OperationId { get; }
-        public bool Learned { get; private set; }
-        public DateTime AddDate { get; }
-        public DateTime? LearnedDate { get; private set; }
+        public long First { get; set; }
+        public long Second { get; set; }
+        public byte OperationId { get; set; }
+        public bool Learned { get; set; }
+        public DateTime AddDate { get; set; }
+        public DateTime? LearnedDate { get; set; }
+        public uint LeadTime { get; set; }
 
 
         private Operation operation;

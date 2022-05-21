@@ -11,7 +11,7 @@ namespace ThinkFast.Repositories
         bool Any();
         IEnumerable<T> Get(Expression<Func<T, bool>> predicate = null, int? top = null);
         TValue Max<TValue>(Func<T, TValue> predicate);
-        int Count();
+        int Count(Func<T, bool> predicate = null);
         T GetItem(int id);
         int DeleteItem(int id);
         int SaveItem(T item);

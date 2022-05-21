@@ -45,9 +45,11 @@ namespace ThinkFast.Repositories
             return database.Get<T>(id);
         }
 
-        public int Count()
+        public int Count(Func<T, bool> predicate = null)
         {
-            return database.Table<T>().Count();
+            return predicate == null 
+            ? database.Table<T>().Count()
+            : database.Table<T>().Count(predicate);
         }
 
         public int DeleteItem(int id)
