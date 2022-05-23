@@ -303,7 +303,7 @@ namespace ThinkFast.Views
         private bool EndGame()
         {
             Shell.Current.Navigation.PopModalAsync();
-            DependencyService.Get<IAdInterstitial>().ShowAd();
+            //DependencyService.Get<IAdInterstitial>().ShowAd();
             return false;
         }
 
@@ -331,11 +331,11 @@ namespace ThinkFast.Views
             };
             goBackButton.Clicked += GoBackButtonOnClicked;
 
-            var adMod = new NativeAdView();
+            //var adMod = new NativeAdView();
 
             var stack = new StackLayout
             {
-                Children = { frame, button, goBackButton, adMod },
+                Children = { frame, button, goBackButton },
                 BackgroundColor = Color.FromRgb(232, 232, 240)
             };
 
@@ -398,7 +398,7 @@ namespace ThinkFast.Views
         {
             Shell.Current.Navigation.PopModalAsync();
 
-            DependencyService.Get<IAdInterstitial>().ShowAd();
+            //DependencyService.Get<IAdInterstitial>().ShowAd();
         }
 
         private void ButtonOnClicked(object sender, EventArgs e)

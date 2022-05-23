@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using MarcTron.Plugin;
 using Microcharts;
 using Microcharts.Forms;
 using SkiaSharp;
@@ -50,7 +51,11 @@ namespace ThinkFast.Views
         private void StartGame()
         {
             Content = GetGrid();
-
+#if DEBUG
+            CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-3940256099942544/1033173712");
+#else
+	        CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-6005536417008283/2374045929");
+#endif
             StartAnimate();
         }
 
@@ -446,7 +451,11 @@ namespace ThinkFast.Views
         private void GoBackButtonOnClicked(object sender, EventArgs e)
         {
             Shell.Current.Navigation.PopModalAsync();
-            DependencyService.Get<IAdInterstitial>().ShowAd();
+
+            if(CrossMTAdmob.Current.IsInterstitialLoaded())
+            {
+                CrossMTAdmob.Current.ShowInterstitial();
+            }
         }
     }
 }

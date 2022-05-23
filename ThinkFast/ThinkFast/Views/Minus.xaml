@@ -24,7 +24,7 @@
                     HorizontalOptions="Center" 
                     Clicked="ThreeThreeClicked"/>
 
-            <views:NativeAdView HeightRequest="280" VerticalOptions="EndAndExpand"/>
+            <!--<views:NativeAdView HeightRequest="280" VerticalOptions="EndAndExpand"/>-->
 
         </StackLayout>
     </ContentPage.Content>

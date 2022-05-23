@@ -20,7 +20,7 @@
             <Button Margin="0,16,0,0" Text="000 ÷ 0"
                     HorizontalOptions="Center" 
                     Clicked="ThreeTwoClicked"/>
-            <views:NativeAdView HeightRequest="280" VerticalOptions="EndAndExpand"/>
+            <!--<views:NativeAdView HeightRequest="280" VerticalOptions="EndAndExpand"/>-->
 
         </StackLayout>
     </ContentPage.Content>

@@ -1,4 +1,5 @@
 ﻿using System;
+using MarcTron.Plugin;
 using ThinkFast.Models;
 using ThinkFast.Models.Operations;
 using ThinkFast.Resources;
@@ -72,6 +73,11 @@ namespace ThinkFast.Views
         private void StartGame()
         {
             Content = GetGrid();
+#if DEBUG
+	        CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-3940256099942544/1033173712");
+#else
+	        CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-6005536417008283/2374045929");
+#endif
 
             StartAnimate();
         }
@@ -342,11 +348,9 @@ namespace ThinkFast.Views
             };
             goBackButton.Clicked += GoBackButtonOnClicked;
 
-            var adMod = new NativeAdView();
-
             var stack = new StackLayout
             {
-                Children = {frame, button, goBackButton, adMod },
+                Children = {frame, button, goBackButton },
                 BackgroundColor = Color.FromRgb(232, 232, 240)
             };
 
@@ -409,7 +413,10 @@ namespace ThinkFast.Views
         {
             Shell.Current.Navigation.PopModalAsync();
 
-            DependencyService.Get<IAdInterstitial>().ShowAd();
+            if (CrossMTAdmob.Current.IsInterstitialLoaded())
+            {
+                CrossMTAdmob.Current.ShowInterstitial();
+            }
         }
 
         private void ButtonOnClicked(object sender, EventArgs e)
