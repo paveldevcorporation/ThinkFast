@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThinkFast.Resources;
+using ThinkFast.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,11 +14,12 @@ namespace ThinkFast.Views.Rules
     public partial class MinusRule : ContentPage
     {
         private static readonly Color color = Color.FromRgb(232, 232, 240);
+        readonly IFirebaseAnalyticsService analyticsService = DependencyService.Get<IFirebaseAnalyticsService>();
 
         public MinusRule()
         {
             InitializeComponent();
-
+            analyticsService.LogEvent("minus_rule");
             var frame1To20 = GetFrame(AppResources.Subtraction1To20Rule, "14 - 6 = 14 - 4 - 2 = 8");
             var frame7 = GetFrame(AppResources.Minus7Message, "55 - 7 = 55 - 10 + 3 = 48");
             var frame8 = GetFrame(AppResources.Minus8Message, "66 - 8 = 66 - 10 + 2 = 58");

@@ -3,6 +3,7 @@ using MarcTron.Plugin;
 using ThinkFast.Models;
 using ThinkFast.Models.Operations;
 using ThinkFast.Resources;
+using ThinkFast.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -29,6 +30,7 @@ namespace ThinkFast.Views
         private Label question;
         private int secondRung;
         private uint leadTime;
+        readonly IFirebaseAnalyticsService analyticsService = DependencyService.Get<IFirebaseAnalyticsService>();
 
 
         public Training()
@@ -72,6 +74,7 @@ namespace ThinkFast.Views
 
         private void StartGame()
         {
+            analyticsService.LogEvent($"start_{firstRung}_{operation.GetType().Name}_{secondRung}");
             Content = GetGrid();
 #if DEBUG
 	        CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-3940256099942544/1033173712");

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "932609023087",
+    "project_id": "fastthinker-6d991",
+    "storage_bucket": "fastthinker-6d991.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:932609023087:android:67d44bec3d8414d2b9819a",
+        "android_client_info": {
+          "package_name": "com.paveldev.smartaccountant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "932609023087-9ff3vdbvrnqu1k0dbt24h0vp24f42uin.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtsr3lN5egC6I854kL8OcYtRLBIzT5lr4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "932609023087-9ff3vdbvrnqu1k0dbt24h0vp24f42uin.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

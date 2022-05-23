@@ -8,6 +8,7 @@ using ThinkFast.Models;
 using ThinkFast.Models.Games;
 using ThinkFast.Models.Games.LevelTypes;
 using ThinkFast.Resources;
+using ThinkFast.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,6 +17,7 @@ namespace ThinkFast.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GamePage : ContentPage
     {
+        readonly IFirebaseAnalyticsService analyticsService = DependencyService.Get<IFirebaseAnalyticsService>();
         private static int r = 112;
         private static int g = 144;
         private static int b = 160;
@@ -50,6 +52,7 @@ namespace ThinkFast.Views
 
         private void StartGame()
         {
+            analyticsService.LogEvent("start_game");
             Content = GetGrid();
 #if DEBUG
             CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-3940256099942544/1033173712");
@@ -301,7 +304,7 @@ namespace ThinkFast.Views
                 score.Text = points.ToString("F0");
                 step++;
 
-                if (step == 5 && levelId < 48)
+                if (step == 5 && levelId < 50)
                 {
                     levelId++;
                     step = 0;

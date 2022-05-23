@@ -1,5 +1,6 @@
 ﻿using System;
 using ThinkFast.Resources;
+using ThinkFast.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,11 +10,12 @@ namespace ThinkFast.Views.Rules
     public partial class AddRule : ContentPage
     {
         private static readonly Color color = Color.FromRgb(232, 232, 240);
+        readonly IFirebaseAnalyticsService analyticsService = DependencyService.Get<IFirebaseAnalyticsService>();
 
         public AddRule()
         {
             InitializeComponent();
-
+            analyticsService.LogEvent("plus_rule");
             var frameAddition1To20 = GetFrame(AppResources.Addition1To20Rule, "7 + 6 = 7 + 3 + 3 = 13");
             var frame789 = GetFrame(AppResources.Plus_7_8_9_Message, "68 + 7 = 68 + 10 - 3 = 75");
             var frameMulti = GetFrame(AppResources.PlusMultiMessage, "45 + 17 = (40 + 10) + (5 + 7) = 62");

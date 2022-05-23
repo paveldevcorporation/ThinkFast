@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThinkFast.Resources;
+using ThinkFast.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,11 +14,12 @@ namespace ThinkFast.Views.Rules
     public partial class MultiplyRule : ContentPage
     {
         private static readonly Color color = Color.FromRgb(232, 232, 240);
+        readonly IFirebaseAnalyticsService analyticsService = DependencyService.Get<IFirebaseAnalyticsService>();
 
         public MultiplyRule()
         {
             InitializeComponent();
-
+            analyticsService.LogEvent("multiply_rule");
             var four = GetFrame(AppResources.Multiplication4Message, "33 × 4 = 66 × 2 = 132");
             var five2 = GetFrame(AppResources.Multiplication5_2Message, "86 × 5 = 86 ÷ 2 × 10 = 430");
             var five = GetFrame(AppResources.Multiplication5Message, "43 × 5 = 43 × 10 ÷ 2 = 215");

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThinkFast.Resources;
+using ThinkFast.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,10 +14,12 @@ namespace ThinkFast.Views.Rules
     public partial class DivisionRule : ContentPage
     {
         private static readonly Color color = Color.FromRgb(232, 232, 240);
+        readonly IFirebaseAnalyticsService analyticsService = DependencyService.Get<IFirebaseAnalyticsService>();
 
         public DivisionRule()
         {
             InitializeComponent();
+            analyticsService.LogEvent("division_rule");
             var four = GetFrame(AppResources.Division4Message, "48 ÷ 4 = 24 ÷ 2 = 12");
             var five = GetFrame(AppResources.Division5Message, "230 ÷ 5 = 460 ÷ 10 = 46");
             var eight = GetFrame(AppResources.Division8Message, "488 ÷ 8 = 244 ÷ 2 = 122 ÷ 2 = 61");
