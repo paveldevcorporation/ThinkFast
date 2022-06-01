@@ -32,6 +32,7 @@ namespace ThinkFast.Views
         private int secondRung;
         private uint leadTime;
         readonly IFirebaseAnalyticsService analyticsService = DependencyService.Get<IFirebaseAnalyticsService>();
+        readonly IHuaweiAds huaweiAds = DependencyService.Get<IHuaweiAds>();
 
 
         public Training()
@@ -77,11 +78,7 @@ namespace ThinkFast.Views
         {
             analyticsService.LogEvent($"start_{firstRung}_{operation.GetType().Name}_{secondRung}");
             Content = GetGrid();
-#if DEBUG
-	        CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-3940256099942544/1033173712");
-#else
-	        CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-6005536417008283/2374045929");
-#endif
+            huaweiAds.LoadInterstitialAd();
 
             StartAnimate();
         }
@@ -427,15 +424,7 @@ namespace ThinkFast.Views
         {
             Shell.Current.Navigation.PopModalAsync();
 
-            if (CrossMTAdmob.Current.IsInterstitialLoaded())
-            {
-                CrossMTAdmob.Current.ShowInterstitial();
-                analyticsService.LogEvent("show_ads");
-            }
-            else
-            {
-                analyticsService.LogEvent("not_show_ads");
-            }
+            huaweiAds.ShowInterstitial();
         }
 
         private void ButtonOnClicked(object sender, EventArgs e)

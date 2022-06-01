@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="10" android:versionName="1.5" package="com.paveldev.smartaccountant" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="10" android:versionName="1.5" package="com.paveldev.smartaccountant.h" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="23" android:targetSdkVersion="31" />
-	<application android:label="ThinkFast.Android" android:icon="@mipmap/ic_launcher">
+	<application android:label="ThinkFast.Android" android:icon="@mipmap/ic_launcher" android:usesCleartextTraffic="true">
 		<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-6005536417008283~6233485297" />
 	</application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
