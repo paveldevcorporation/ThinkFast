@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MarcTron.Plugin.Controls;
 using ThinkFast.Resources;
-using ThinkFast.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,12 +9,10 @@ namespace ThinkFast.Views.Rules
     public partial class DivisionRule : ContentPage
     {
         private static readonly Color color = Color.FromRgb(232, 232, 240);
-        readonly IFirebaseAnalyticsService analyticsService = DependencyService.Get<IFirebaseAnalyticsService>();
 
         public DivisionRule()
         {
             InitializeComponent();
-            analyticsService.LogEvent("division_rule");
             var four = GetFrame(AppResources.Division4Message, "48 ÷ 4 = 24 ÷ 2 = 12");
             var five = GetFrame(AppResources.Division5Message, "230 ÷ 5 = 460 ÷ 10 = 46");
             var eight = GetFrame(AppResources.Division8Message, "488 ÷ 8 = 244 ÷ 2 = 122 ÷ 2 = 61");
@@ -36,19 +28,11 @@ namespace ThinkFast.Views.Rules
             };
             goBackButton.Clicked += GoBackButtonOnClicked;
 
-            var ads = new MTAdView
-            {
-#if DEBUG
-                AdsId = "ca-app-pub-3940256099942544/6300978111",
-#else
-                AdsId = "ca-app-pub-6005536417008283/9224083823",
-#endif
-                VerticalOptions = LayoutOptions.EndAndExpand
-            };
+           
 
             var stack = new StackLayout
             {
-                Children = { four, five, eight, one, goBackButton, ads },
+                Children = { four, five, eight, one, goBackButton },
                 BackgroundColor = Color.FromRgb(232, 232, 240)
             };
 

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using MarcTron.Plugin;
-using MarcTron.Plugin.Controls;
 using Microcharts;
 using Microcharts.Forms;
 using SkiaSharp;
@@ -18,7 +16,6 @@ namespace ThinkFast.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GamePage : ContentPage
     {
-        readonly IFirebaseAnalyticsService analyticsService = DependencyService.Get<IFirebaseAnalyticsService>();
         private static int r = 112;
         private static int g = 144;
         private static int b = 160;
@@ -38,6 +35,7 @@ namespace ThinkFast.Views
         private int levelId = 1;
         private int step = 0;
         private double points = 0;
+        readonly IHuaweiAds huaweiAds = DependencyService.Get<IHuaweiAds>();
 
 
         public GamePage()
@@ -53,13 +51,8 @@ namespace ThinkFast.Views
 
         private void StartGame()
         {
-            analyticsService.LogEvent("start_game");
             Content = GetGrid();
-#if DEBUG
-            CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-3940256099942544/1033173712");
-#else
-	        CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-6005536417008283/2374045929");
-#endif
+            huaweiAds.LoadInterstitialAd();
             StartAnimate();
         }
 
@@ -443,19 +436,9 @@ namespace ThinkFast.Views
             };
             goBackButton.Clicked += GoBackButtonOnClicked;
 
-            var ads = new MTAdView
-            {
-#if DEBUG
-                AdsId = "ca-app-pub-3940256099942544/6300978111",
-#else
-                AdsId = "ca-app-pub-6005536417008283/9224083823",
-#endif
-                VerticalOptions = LayoutOptions.EndAndExpand
-            };
-
             var stack = new StackLayout
             {
-                Children = { frameStack, chartFrame, goBackButton, ads },
+                Children = { frameStack, chartFrame, goBackButton },
                 BackgroundColor = Color.FromHex("#e6e6e6")
             };
 
@@ -466,15 +449,7 @@ namespace ThinkFast.Views
         {
             Shell.Current.Navigation.PopModalAsync();
 
-            if (CrossMTAdmob.Current.IsInterstitialLoaded())
-            {
-                CrossMTAdmob.Current.ShowInterstitial();
-                analyticsService.LogEvent("show_ads");
-            }
-            else
-            {
-                analyticsService.LogEvent("not_show_ads");
-            }
+            huaweiAds.ShowInterstitial();
         }
     }
 }

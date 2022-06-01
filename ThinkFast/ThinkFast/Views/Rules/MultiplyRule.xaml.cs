@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MarcTron.Plugin.Controls;
 using ThinkFast.Resources;
-using ThinkFast.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,12 +9,10 @@ namespace ThinkFast.Views.Rules
     public partial class MultiplyRule : ContentPage
     {
         private static readonly Color color = Color.FromRgb(232, 232, 240);
-        readonly IFirebaseAnalyticsService analyticsService = DependencyService.Get<IFirebaseAnalyticsService>();
 
         public MultiplyRule()
         {
             InitializeComponent();
-            analyticsService.LogEvent("multiply_rule");
             var four = GetFrame(AppResources.Multiplication4Message, "33 × 4 = 66 × 2 = 132");
             var five2 = GetFrame(AppResources.Multiplication5_2Message, "86 × 5 = 86 ÷ 2 × 10 = 430");
             var five = GetFrame(AppResources.Multiplication5Message, "43 × 5 = 43 × 10 ÷ 2 = 215");
@@ -42,19 +34,11 @@ namespace ThinkFast.Views.Rules
             };
             goBackButton.Clicked += GoBackButtonOnClicked;
 
-            var ads = new MTAdView
-            {
-#if DEBUG
-                AdsId = "ca-app-pub-3940256099942544/6300978111",
-#else
-                AdsId = "ca-app-pub-6005536417008283/9224083823",
-#endif
-                VerticalOptions = LayoutOptions.EndAndExpand
-            };
+            
 
             var stack = new StackLayout
             {
-                Children = { four, five2, five, eight, nine, multiOne, eleven, multi25, multi25_4, multi, goBackButton, ads },
+                Children = { four, five2, five, eight, nine, multiOne, eleven, multi25, multi25_4, multi, goBackButton },
                 BackgroundColor = Color.FromRgb(232, 232, 240)
             };
 

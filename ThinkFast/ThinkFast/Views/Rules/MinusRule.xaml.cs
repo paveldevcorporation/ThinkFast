@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MarcTron.Plugin.Controls;
 using ThinkFast.Resources;
-using ThinkFast.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,12 +9,10 @@ namespace ThinkFast.Views.Rules
     public partial class MinusRule : ContentPage
     {
         private static readonly Color color = Color.FromRgb(232, 232, 240);
-        readonly IFirebaseAnalyticsService analyticsService = DependencyService.Get<IFirebaseAnalyticsService>();
 
         public MinusRule()
         {
             InitializeComponent();
-            analyticsService.LogEvent("minus_rule");
             var frame1To20 = GetFrame(AppResources.Subtraction1To20Rule, "14 - 6 = 14 - 4 - 2 = 8");
             var frame7 = GetFrame(AppResources.Minus7Message, "55 - 7 = 55 - 10 + 3 = 48");
             var frame8 = GetFrame(AppResources.Minus8Message, "66 - 8 = 66 - 10 + 2 = 58");
@@ -37,19 +29,9 @@ namespace ThinkFast.Views.Rules
             };
             goBackButton.Clicked += GoBackButtonOnClicked;
 
-            var ads = new MTAdView
-            {
-#if DEBUG
-                AdsId = "ca-app-pub-3940256099942544/6300978111",
-#else
-                AdsId = "ca-app-pub-6005536417008283/9224083823",
-#endif
-                VerticalOptions = LayoutOptions.EndAndExpand
-            };
-
             var stack = new StackLayout
             {
-                Children = { frame1To20, frame7, frame8, frame9, frameMulti, goBackButton, ads },
+                Children = { frame1To20, frame7, frame8, frame9, frameMulti, goBackButton },
                 BackgroundColor = Color.FromRgb(232, 232, 240)
             };
 

@@ -2,7 +2,6 @@
 using System.Linq;
 using ThinkFast.Models;
 using ThinkFast.Resources;
-using ThinkFast.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,12 +18,10 @@ namespace ThinkFast.Views
         private readonly ExampleRepeat[] repeats;
         private readonly int countExample;
         private uint leadTime;
-        readonly IFirebaseAnalyticsService analyticsService = DependencyService.Get<IFirebaseAnalyticsService>();
 
         public RepeatPage()
         {
             InitializeComponent();
-            analyticsService.LogEvent("start_repeat");
             repeats = App.Database.ExampleRepeat.Get(x => !x.Learned, 25).ToArray();
             countExample = repeats.Length;
             if (repeats == null || repeats.Length == 0)

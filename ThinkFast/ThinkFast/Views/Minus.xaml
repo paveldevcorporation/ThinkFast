@@ -4,7 +4,6 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:resources="clr-namespace:ThinkFast.Resources;assembly=ThinkFast"
-             xmlns:views="clr-namespace:ThinkFast.Views;assembly=ThinkFast"
              mc:Ignorable="d"
              x:Class="ThinkFast.Views.Minus"
              BackgroundColor="#D0E0F0"

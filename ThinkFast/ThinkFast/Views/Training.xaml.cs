@@ -1,6 +1,4 @@
 ﻿using System;
-using MarcTron.Plugin;
-using MarcTron.Plugin.Controls;
 using ThinkFast.Models;
 using ThinkFast.Models.Operations;
 using ThinkFast.Resources;
@@ -31,7 +29,6 @@ namespace ThinkFast.Views
         private Label question;
         private int secondRung;
         private uint leadTime;
-        readonly IFirebaseAnalyticsService analyticsService = DependencyService.Get<IFirebaseAnalyticsService>();
         readonly IHuaweiAds huaweiAds = DependencyService.Get<IHuaweiAds>();
 
 
@@ -76,7 +73,6 @@ namespace ThinkFast.Views
 
         private void StartGame()
         {
-            analyticsService.LogEvent($"start_{firstRung}_{operation.GetType().Name}_{secondRung}");
             Content = GetGrid();
             huaweiAds.LoadInterstitialAd();
 
@@ -116,6 +112,7 @@ namespace ThinkFast.Views
             }
 
             GetStackLayout();
+            huaweiAds.ShowInterstitial();
         }
 
         private Grid GetGrid()
@@ -349,19 +346,9 @@ namespace ThinkFast.Views
             };
             goBackButton.Clicked += GoBackButtonOnClicked;
 
-            var ads = new MTAdView
-            {
-#if DEBUG
-                AdsId = "ca-app-pub-3940256099942544/6300978111",
-#else
-                AdsId = "ca-app-pub-6005536417008283/9224083823",
-#endif
-                VerticalOptions = LayoutOptions.EndAndExpand
-            };
-
             var stack = new StackLayout
             {
-                Children = {frame, button, goBackButton, ads},
+                Children = {frame, button, goBackButton},
                 BackgroundColor = Color.FromRgb(232, 232, 240)
             };
 
@@ -423,8 +410,6 @@ namespace ThinkFast.Views
         private void GoBackButtonOnClicked(object sender, EventArgs e)
         {
             Shell.Current.Navigation.PopModalAsync();
-
-            huaweiAds.ShowInterstitial();
         }
 
         private void ButtonOnClicked(object sender, EventArgs e)

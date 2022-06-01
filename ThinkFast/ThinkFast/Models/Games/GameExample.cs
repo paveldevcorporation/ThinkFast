@@ -1,5 +1,4 @@
-﻿using ThinkFast.Models.Games;
-using ThinkFast.Models.Games.LevelTypes;
+﻿using ThinkFast.Models.Games.LevelTypes;
 
 namespace ThinkFast.Models.Games
 {

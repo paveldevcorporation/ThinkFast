@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ThinkFast.Services
+﻿namespace ThinkFast.Services
 {
     public interface IHuaweiAds
     {
