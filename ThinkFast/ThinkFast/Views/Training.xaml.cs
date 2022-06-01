@@ -1,5 +1,6 @@
 ﻿using System;
 using MarcTron.Plugin;
+using MarcTron.Plugin.Controls;
 using ThinkFast.Models;
 using ThinkFast.Models.Operations;
 using ThinkFast.Resources;
@@ -327,7 +328,7 @@ namespace ThinkFast.Views
 
         private void GetStackLayout()
         {
-            if(example.Step>1)
+            if (example.Step > 1)
             {
                 var exampleRepeat = new ExampleRepeat(example.First, example.Second, example.Operation.Id, leadTime);
                 App.Database.ExampleRepeat.SaveItem(exampleRepeat);
@@ -351,9 +352,19 @@ namespace ThinkFast.Views
             };
             goBackButton.Clicked += GoBackButtonOnClicked;
 
+            var ads = new MTAdView
+            {
+#if DEBUG
+                AdsId = "ca-app-pub-3940256099942544/6300978111",
+#else
+                AdsId = "ca-app-pub-6005536417008283/9224083823",
+#endif
+                VerticalOptions = LayoutOptions.EndAndExpand
+            };
+
             var stack = new StackLayout
             {
-                Children = {frame, button, goBackButton },
+                Children = {frame, button, goBackButton, ads},
                 BackgroundColor = Color.FromRgb(232, 232, 240)
             };
 
@@ -419,6 +430,11 @@ namespace ThinkFast.Views
             if (CrossMTAdmob.Current.IsInterstitialLoaded())
             {
                 CrossMTAdmob.Current.ShowInterstitial();
+                analyticsService.LogEvent("show_ads");
+            }
+            else
+            {
+                analyticsService.LogEvent("not_show_ads");
             }
         }
 

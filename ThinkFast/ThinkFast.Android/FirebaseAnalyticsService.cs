@@ -24,16 +24,16 @@ namespace ThinkFast.Droid
 
         public void SetUserId(string userId)
         {
-//#if !DEBUG
+#if !DEBUG
             var fireBaseAnalytics = FirebaseAnalytics.GetInstance(Android.App.Application.Context);
 
             fireBaseAnalytics.SetUserId(userId);
-//#endif
+#endif
         }
 
         public void LogEvent(string eventId, IDictionary<string, string> parameters)
         {
-//#if !DEBUG
+#if !DEBUG
             var fireBaseAnalytics = FirebaseAnalytics.GetInstance(Android.App.Application.Context);
 
             if (parameters == null)
@@ -50,7 +50,7 @@ namespace ThinkFast.Droid
             }
 
             fireBaseAnalytics.LogEvent(eventId, bundle);
-//#endif
+#endif
         }
     }
 }

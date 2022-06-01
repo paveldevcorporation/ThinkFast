@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MarcTron.Plugin.Controls;
 using ThinkFast.Resources;
 using ThinkFast.Services;
 using Xamarin.Forms;
@@ -35,11 +36,19 @@ namespace ThinkFast.Views.Rules
             };
             goBackButton.Clicked += GoBackButtonOnClicked;
 
-            //var adMod = new NativeAdView();
+            var ads = new MTAdView
+            {
+#if DEBUG
+                AdsId = "ca-app-pub-3940256099942544/6300978111",
+#else
+                AdsId = "ca-app-pub-6005536417008283/9224083823",
+#endif
+                VerticalOptions = LayoutOptions.EndAndExpand
+            };
 
             var stack = new StackLayout
             {
-                Children = { four, five, eight, one, goBackButton },
+                Children = { four, five, eight, one, goBackButton, ads },
                 BackgroundColor = Color.FromRgb(232, 232, 240)
             };
 
