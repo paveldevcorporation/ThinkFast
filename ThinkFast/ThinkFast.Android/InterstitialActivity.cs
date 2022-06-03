@@ -12,7 +12,7 @@ namespace ThinkFast.Droid
         public void LoadInterstitialAd()
         {
             interstitialAd = new InterstitialAd(Android.App.Application.Context);
-            interstitialAd.AdId = "testb4znbuh3n2"; //testb4znbuh3n2 is a dedicated test ad slot ID.
+            interstitialAd.AdId = "a9s7snw11g"; //testb4znbuh3n2 is a dedicated test ad slot ID.
             AdParam adParam = new AdParam.Builder().Build();
             interstitialAd.LoadAd(adParam);
         }
